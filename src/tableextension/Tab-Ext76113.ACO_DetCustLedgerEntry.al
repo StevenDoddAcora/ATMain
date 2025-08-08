@@ -1,4 +1,4 @@
-tableextension 50118 "ACO_DetCustLedgerEntry" extends "Detailed Cust. Ledg. Entry" 
+tableextension 50113 "ACO_DetCustLedgerEntry" extends "Detailed Cust. Ledg. Entry"
 {
 
     //#region "Documentation"
@@ -8,10 +8,11 @@ tableextension 50118 "ACO_DetCustLedgerEntry" extends "Detailed Cust. Ledg. Entr
     fields
     {
         //>>2.3.0.2018
-        field(50010; ACO_DocumentDate; Date){
+        field(50010; ACO_DocumentDate; Date)
+        {
             Caption = 'Document Date';
             FieldClass = FlowField;
-            CalcFormula = Lookup("Cust. Ledger Entry"."Document Date" WHERE ("Entry No."=FIELD("Cust. Ledger Entry No.")));
+            CalcFormula = Lookup("Cust. Ledger Entry"."Document Date" WHERE("Entry No." = FIELD("Cust. Ledger Entry No.")));
         }
         //<<2.3.0.2018
     }

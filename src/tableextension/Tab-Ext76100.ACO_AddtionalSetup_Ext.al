@@ -47,7 +47,7 @@ tableextension 50100 "ACO_AddtionalSetup_Ext" extends ACO_AdditionalSetup //Acor
             Description = 'It specifies the File location to be used for archive imported Invoice Files (Quantum to NAV)';
             Editable = true;
         }
-        field(76135; "ACO_AutoPostInvoiceFile"; Boolean)
+        field(50135; "ACO_AutoPostInvoiceFile"; Boolean)
         {
             Caption = 'Auto-Post Invoice File';
             DataClassification = CustomerContent;
@@ -55,7 +55,7 @@ tableextension 50100 "ACO_AddtionalSetup_Ext" extends ACO_AdditionalSetup //Acor
             Editable = true;
         }
         //>>2.2.3.2018
-        field(76137; ACO_LastCreditImportNo; Integer)
+        field(50137; ACO_LastCreditImportNo; Integer)
         {
             Caption = 'Last Credit Import No.';
             DataClassification = CustomerContent;
@@ -77,7 +77,7 @@ tableextension 50100 "ACO_AddtionalSetup_Ext" extends ACO_AdditionalSetup //Acor
             Description = 'It specifies the File location to be used for archive imported Credit Files (Quantum to NAV)';
             Editable = true;
         }
-        field(76155; "ACO_AutoPostCreditFile"; Boolean)
+        field(50155; "ACO_AutoPostCreditFile"; Boolean)
         {
             Caption = 'Auto-Post Credit File';
             DataClassification = CustomerContent;
@@ -109,7 +109,7 @@ tableextension 50100 "ACO_AddtionalSetup_Ext" extends ACO_AdditionalSetup //Acor
             Editable = true;
         }
         //>>2.2.3.2018
-        field(76205; "ACO_UnitPriceRoundToZeroTol"; Decimal)
+        field(50205; "ACO_UnitPriceRoundToZeroTol"; Decimal)
         {
             Caption = 'Unit Price Round to 0 Tolerance';
             Description = 'If during Invoice import the unit price is in below (+-) Unit Price Round to 0 Tolerance the system will round the value to 0';

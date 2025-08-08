@@ -1,4 +1,4 @@
-tableextension 50118 "ACO_DetVendLedgerEntry" extends "Detailed Vendor Ledg. Entry" 
+tableextension 50114 "ACO_DetVendLedgerEntry" extends "Detailed Vendor Ledg. Entry"
 {
 
     //#region "Documentation"
@@ -8,10 +8,11 @@ tableextension 50118 "ACO_DetVendLedgerEntry" extends "Detailed Vendor Ledg. Ent
     fields
     {
         //>>2.3.0.2018
-        field(50010; ACO_DocumentDate; Date){
+        field(50010; ACO_DocumentDate; Date)
+        {
             Caption = 'Document Date';
             FieldClass = FlowField;
-            CalcFormula = Lookup("Cust. Ledger Entry"."Document Date" WHERE ("Entry No."=FIELD("Vendor Ledger Entry No.")));
+            CalcFormula = Lookup("Cust. Ledger Entry"."Document Date" WHERE("Entry No." = FIELD("Vendor Ledger Entry No.")));
         }
         //<<2.3.0.2018
     }

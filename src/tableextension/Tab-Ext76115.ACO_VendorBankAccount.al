@@ -1,4 +1,4 @@
-tableextension 50118 "ACO_VendorBankAccount" extends "Vendor Bank Account"
+tableextension 50115 "ACO_VendorBankAccount" extends "Vendor Bank Account"
 {
     //#region "Documentation"
     // 2.3.4.2018 LBR 05/11/2019 - CHG003386 (Payment Journals) - new "Manual Export" logic added

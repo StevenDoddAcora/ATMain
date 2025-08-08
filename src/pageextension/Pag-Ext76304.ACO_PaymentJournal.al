@@ -179,16 +179,16 @@ pageextension 50304 "ACO_PaymentJournal" extends "Payment Journal" //Extends pag
                 PromotedOnly = true;
                 PromotedCategory = Report;
 
-                trigger OnAction();
-                var
-                    AgedCreditorsAnalysis: Report "ACO_SuggVendPaymentAnalysis";
-                    GenJnlLine: Record "Gen. Journal Line";
-                begin
-                    GenJnlLine.SETRANGE("Journal Template Name", Rec."Journal Template Name");
-                    GenJnlLine.SETRANGE("Journal Batch Name", Rec."Journal Batch Name");
+    trigger OnAction();
+    var
+        AgedCreditorsAnalysis: Report "ACO_SuggVendPaymentAnalysis";
+        GenJnlLine: Record "Gen. Journal Line";
+    begin
+        GenJnlLine.SETRANGE("Journal Template Name", Rec."Journal Template Name");
+        GenJnlLine.SETRANGE("Journal Batch Name", Rec."Journal Batch Name");
 
-                    Report.Run(Report::"ACO_SuggVendPaymentAnalysis", true, false, GenJnlLine);
-                end;
+        Report.Run(Report::"ACO_SuggVendPaymentAnalysis", true, false, GenJnlLine);
+    end;
             }
             //<<1.1.0.2018
             //>>2.2.5.2018
@@ -202,13 +202,13 @@ pageextension 50304 "ACO_PaymentJournal" extends "Payment Journal" //Extends pag
                 PromotedOnly = true;
                 PromotedCategory = Report;
 
-                trigger OnAction();
-                var
-                    SuggestVendorPayments: Report ACO_SuggestVendorPayments;
-                begin
-                    SuggestVendorPayments.SetGenJnlLine(Rec);
-                    SuggestVendorPayments.RUNMODAL;
-                end;
+    trigger OnAction();
+    var
+        SuggestVendorPayments: Report ACO_SuggestVendorPayments;
+    begin
+        SuggestVendorPayments.SetGenJnlLine(Rec);
+        SuggestVendorPayments.RUNMODAL;
+    end;
             }
             //<<2.2.5.2018
         }

@@ -1,4 +1,4 @@
-tableextension 50118 "ACO_GenJnlLine_Ext" extends "Gen. Journal Line"
+tableextension 50112 "ACO_GenJnlLine_Ext" extends "Gen. Journal Line"
 {
     //#region "Documentation"
     // 2.2.5.2018 LBR 15/10/2019 - CHG003334 (BAC's Export file selection). New logic added to pre-populate some field for payments;

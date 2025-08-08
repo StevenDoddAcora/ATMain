@@ -11,7 +11,7 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
     //#endregion "Documentation"
 
     DefaultLayout = RDLC;
-    RDLCLayout = 'src/report/layouts/Rep76401.ACO_SuggVendPaymentAnalysis.rdlc';
+    RDLCLayout = 'src/report/layouts/Rep50401.ACO_SuggVendPaymentAnalysis.rdlc';
     Caption = 'Suggested Vendor Payment Analysis';
     UsageCategory = ReportsAndAnalysis;
 

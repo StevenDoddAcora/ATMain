@@ -1,4 +1,4 @@
-table 89000 "ACO_AdditionalSetup"
+table 50106 "ACO_AdditionalSetup"
 {
 
     fields

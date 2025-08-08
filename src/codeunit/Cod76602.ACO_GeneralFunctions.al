@@ -30,7 +30,7 @@ codeunit 50602 "ACO_GeneralFunctions"
 
         // Calc Customer Currency Data
         with Vendor do begin
-            if FindSet()(true) then begin
+            if FindSet(true) then begin
                 repeat
                 begin
                     RecalculateVendorCurrencyDataRec(Vendor, pAtDate);
@@ -181,7 +181,7 @@ codeunit 50602 "ACO_GeneralFunctions"
                         DateRec.Reset();
                         DateRec.SetRange("Period Type", DateRec."Period Type"::Quarter);
                         DateRec.Setfilter("Period Start", '<=%1', pDate);
-                        DateRec.FindLast()();
+                        DateRec.FindLast();
                         CustDateFilter[1] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
                     end;
                 AvgCalcPerdiod::Year:
@@ -189,7 +189,7 @@ codeunit 50602 "ACO_GeneralFunctions"
                         DateRec.Reset();
                         DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
                         DateRec.Setfilter("Period Start", '<=%1', pDate);
-                        DateRec.FindLast()();
+                        DateRec.FindLast();
                         CustDateFilter[1] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
                         //CustDateFilter[2]; // is this same as the this year calculation
                     end;
@@ -214,13 +214,13 @@ codeunit 50602 "ACO_GeneralFunctions"
             DateRec.Reset();
             DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
             DateRec.Setfilter("Period Start", '<=%1', pDate);
-            DateRec.FindLast()();
+            DateRec.FindLast();
             CustDateFilter[2] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
             // Last Year
             DateRec.Reset();
             DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
             DateRec.Setfilter("Period Start", '<=%1', CALCDATE('-1Y', pDate));
-            DateRec.FindLast()();
+            DateRec.FindLast();
             CustDateFilter[3] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
             //<<3.0.1.2018
 
@@ -292,7 +292,7 @@ codeunit 50602 "ACO_GeneralFunctions"
 
         // Calc Customer Currency Data
         with Customer do begin
-            if FindSet()(true) then begin
+            if FindSet(true) then begin
                 repeat
                 begin
                     RecalculateCustomerCurrencyDataRec(Customer, pAtDate);
@@ -461,7 +461,7 @@ codeunit 50602 "ACO_GeneralFunctions"
         CustLedgerEntry.SETRANGE(Open, true);
         if (pFilterDate <> 0D) then
             CustLedgerEntry.SETFILTER("Posting Date", '<=%1', pFilterDate);
-        if CustLedgerEntry.FindSet()(false) then begin
+        if CustLedgerEntry.FindSet(false) then begin
             repeat
             begin
                 CustLedgerEntry.Calcfields("Remaining Amt. (LCY)");
@@ -506,7 +506,7 @@ codeunit 50602 "ACO_GeneralFunctions"
         CurrExchRate: Record "Currency Exchange Rate";
     begin
         CurrExchRate.SetRange("Currency Code", pCurrCode);
-        if CurrExchRate.FindLast()() then
+        if CurrExchRate.FindLast() then
             exit(CurrExchRate."Exchange Rate Amount");
 
         exit(0);
@@ -589,7 +589,7 @@ codeunit 50602 "ACO_GeneralFunctions"
                         //DateRec.Setfilter("Period End", '<=%1', pDate);
                         //DateRec.FindFirst()();
                         DateRec.Setfilter("Period Start", '<=%1', pDate);
-                        DateRec.FindLast()();
+                        DateRec.FindLast();
                         //<<2.2.4.2018
                         CustDateFilter[1] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
                     end;
@@ -602,7 +602,7 @@ codeunit 50602 "ACO_GeneralFunctions"
                         //DateRec.Setfilter("Period End", '<=%1', pDate);
                         //DateRec.FindFirst()();
                         DateRec.Setfilter("Period Start", '<=%1', pDate);
-                        DateRec.FindLast()();
+                        DateRec.FindLast();
                         //<<2.2.4.2018
                         CustDateFilter[1] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
                         //CustDateFilter[2]; // is this same as the this year calculation
@@ -632,13 +632,13 @@ codeunit 50602 "ACO_GeneralFunctions"
             DateRec.Reset();
             DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
             DateRec.Setfilter("Period Start", '<=%1', pDate);
-            DateRec.FindLast()();
+            DateRec.FindLast();
             CustDateFilter[2] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
             // Last Year
             DateRec.Reset();
             DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
             DateRec.Setfilter("Period Start", '<=%1', CALCDATE('-1Y', pDate));
-            DateRec.FindLast()();
+            DateRec.FindLast();
             CustDateFilter[3] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
             //<<3.0.1.2018
 

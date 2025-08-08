@@ -41,7 +41,7 @@ codeunit 50603 "ACO_DisputeManagement"
             exit;
 
         EntryNo := 0;
-        if VendDisputeEntry.FindLast()() then begin
+        if VendDisputeEntry.FindLast() then begin
             VendDisputeEntry.LockTable();
             EntryNo := VendDisputeEntry.ACO_EntryNo;
         end;
