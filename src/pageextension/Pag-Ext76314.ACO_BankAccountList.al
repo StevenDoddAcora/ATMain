@@ -8,7 +8,7 @@ pageextension 50314 "ACO_BankAccountList" extends "Bank Account List"
     {
         addlast(Control1)
         {
-            field(ACO_Default; ACO_Default)
+            field(ACO_Default; Rec.ACO_Default)
             {
                 ApplicationArea = All;
             }
@@ -19,3 +19,4 @@ pageextension 50314 "ACO_BankAccountList" extends "Bank Account List"
     {
     }
 }
+

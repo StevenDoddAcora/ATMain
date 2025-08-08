@@ -13,7 +13,7 @@ pageextension 50309 "ACO_CustomerLedgerEntries" extends "Customer Ledger Entries
         addafter("Customer No.")
         {
             //>>2.3.0.2018
-            field(ACO_CustomerName; ACO_CustomerName)
+            field(ACO_CustomerName; Rec.ACO_CustomerName)
             {
                 Visible = true;
                 Editable = false;
@@ -23,14 +23,14 @@ pageextension 50309 "ACO_CustomerLedgerEntries" extends "Customer Ledger Entries
 
         addbefore("On Hold")
         {
-            field(ACO_DisputeCode; ACO_DisputeCode)
+            field(ACO_DisputeCode; Rec.ACO_DisputeCode)
             {
                 ApplicationArea = All;
                 ToolTip = 'It identifies the Dispute Code related to the Customer Ledger Entry';
                 Visible = true;
             }
             //>>2.3.0.2018
-            field(ACO_DisputeName; ACO_DisputeName)
+            field(ACO_DisputeName; Rec.ACO_DisputeName)
             {
                 Visible = true;
                 Editable = false;
@@ -50,3 +50,5 @@ pageextension 50309 "ACO_CustomerLedgerEntries" extends "Customer Ledger Entries
     {
     }
 }
+
+

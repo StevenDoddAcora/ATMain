@@ -8,7 +8,7 @@ pageextension 50319 "ACO_PurchInvoice" extends "Purchase Invoice"
     {
         addlast(General)
         {
-            field(ACO_DisputeCode; ACO_DisputeCode)
+            field(ACO_DisputeCode; Rec.ACO_DisputeCode)
             {
                 ApplicationArea = all;
                 trigger OnValidate();
@@ -16,7 +16,7 @@ pageextension 50319 "ACO_PurchInvoice" extends "Purchase Invoice"
                     CalcFields(ACO_DisputeName);
                 end;
             }
-            field(ACO_DisputeName; ACO_DisputeName)
+            field(ACO_DisputeName; Rec.ACO_DisputeName)
             {
                 ApplicationArea = all;
                 Editable = false;
@@ -28,3 +28,4 @@ pageextension 50319 "ACO_PurchInvoice" extends "Purchase Invoice"
     {
     }
 }
+

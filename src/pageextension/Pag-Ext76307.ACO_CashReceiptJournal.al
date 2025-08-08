@@ -11,7 +11,7 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
         addlast(Control1)
         {
             //>> Add new controls based on new Shortcut dimension array
-            field(ExtendedShortcutDimCode3; ExtendedShortcutDimCode[3])
+            field(ExtendedShortcutDimCode3; Rec.ExtendedShortcutDimCode[3])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,3';
@@ -25,7 +25,7 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                     ApplyJnlDimCombination(3, ExtendedShortcutDimCode[3])
                 end;
             }
-            field(ExtendedShortcutDimCode4; ExtendedShortcutDimCode[4])
+            field(ExtendedShortcutDimCode4; Rec.ExtendedShortcutDimCode[4])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,4';
@@ -39,7 +39,7 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                     ApplyJnlDimCombination(4, ExtendedShortcutDimCode[4])
                 end;
             }
-            field(ExtendedShortcutDimCode5; ExtendedShortcutDimCode[5])
+            field(ExtendedShortcutDimCode5; Rec.ExtendedShortcutDimCode[5])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,5';
@@ -53,7 +53,7 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                     ApplyJnlDimCombination(5, ExtendedShortcutDimCode[5])
                 end;
             }
-            field(ExtendedShortcutDimCode6; ExtendedShortcutDimCode[6])
+            field(ExtendedShortcutDimCode6; Rec.ExtendedShortcutDimCode[6])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,6';
@@ -67,7 +67,7 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                     ApplyJnlDimCombination(6, ExtendedShortcutDimCode[6])
                 end;
             }
-            field(ExtendedShortcutDimCode7; ExtendedShortcutDimCode[7])
+            field(ExtendedShortcutDimCode7; Rec.ExtendedShortcutDimCode[7])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,7';
@@ -81,7 +81,7 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                     ApplyJnlDimCombination(7, ExtendedShortcutDimCode[7])
                 end;
             }
-            field(ExtendedShortcutDimCode8; ExtendedShortcutDimCode[8])
+            field(ExtendedShortcutDimCode8; Rec.ExtendedShortcutDimCode[8])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,8';

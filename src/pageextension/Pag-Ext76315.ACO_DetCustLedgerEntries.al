@@ -9,7 +9,7 @@ pageextension 50315 "ACO_DetCustLedgerEntries" extends "Detailed Cust. Ledg. Ent
         addafter("Posting Date")
         {
             //>>2.3.0.2018
-            field(ACO_DocumentDate; ACO_DocumentDate)
+            field(ACO_DocumentDate; Rec.ACO_DocumentDate)
             {
                 Visible = true;
                 Editable = false;
@@ -23,3 +23,4 @@ pageextension 50315 "ACO_DetCustLedgerEntries" extends "Detailed Cust. Ledg. Ent
         // Nothing in here yet
     }
 }
+

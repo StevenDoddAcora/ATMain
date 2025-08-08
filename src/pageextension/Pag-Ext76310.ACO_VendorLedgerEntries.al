@@ -15,7 +15,7 @@ pageextension 50310 "ACO_VendorLedgerEntries" extends "Vendor Ledger Entries" //
         addafter("Vendor No.")
         {
             //>>2.3.0.2018
-            field(ACO_VendorName; ACO_VendorName)
+            field(ACO_VendorName; Rec.ACO_VendorName)
             {
                 Visible = true;
                 Editable = false;
@@ -25,14 +25,14 @@ pageextension 50310 "ACO_VendorLedgerEntries" extends "Vendor Ledger Entries" //
 
         addbefore("On Hold")
         {
-            field(ACO_DisputeCode; ACO_DisputeCode)
+            field(ACO_DisputeCode; Rec.ACO_DisputeCode)
             {
                 ApplicationArea = All;
                 ToolTip = 'It identifies the Dispute Code related to the Vendor Ledger Entry';
                 Visible = true;
             }
             //>>2.3.0.2018
-            field(ACO_DisputeName; ACO_DisputeName)
+            field(ACO_DisputeName; Rec.ACO_DisputeName)
             {
                 Visible = true;
                 Editable = false;
@@ -68,3 +68,5 @@ pageextension 50310 "ACO_VendorLedgerEntries" extends "Vendor Ledger Entries" //
         }
     }
 }
+
+

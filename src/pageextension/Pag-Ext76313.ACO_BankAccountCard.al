@@ -9,7 +9,7 @@ pageextension 50313 "ACO_BankAccountCard" extends "Bank Account Card"
     {
         addafter("Payment Match Tolerance")
         {
-            field(ACO_Default; ACO_Default)
+            field(ACO_Default; Rec.ACO_Default)
             {
                 ApplicationArea = All;
             }
@@ -17,11 +17,11 @@ pageextension 50313 "ACO_BankAccountCard" extends "Bank Account Card"
         //>>2.2.5.2018
         addafter("Payment Export Format")
         {
-            field(ACO_BankPaymentType; ACO_BankPaymentType)
+            field(ACO_BankPaymentType; Rec.ACO_BankPaymentType)
             {
                 ApplicationArea = All;
             }
-            field(ACO_PaymentMethodCode; ACO_PaymentMethodCode)
+            field(ACO_PaymentMethodCode; Rec.ACO_PaymentMethodCode)
             {
                 ApplicationArea = all;
             }
@@ -33,3 +33,4 @@ pageextension 50313 "ACO_BankAccountCard" extends "Bank Account Card"
     {
     }
 }
+

@@ -8,7 +8,7 @@ pageextension 50318 "ACO_VendorBankAccCard" extends "Vendor Bank Account Card"
     {
         addlast(General)
         {
-            field(ACO_ManualPaymentExp; ACO_ManualPaymentExp)
+            field(ACO_ManualPaymentExp; Rec.ACO_ManualPaymentExp)
             {
                 ApplicationArea = All;
             }
@@ -19,3 +19,4 @@ pageextension 50318 "ACO_VendorBankAccCard" extends "Vendor Bank Account Card"
     {
     }
 }
+

@@ -12,7 +12,7 @@ pageextension 50308 "ACO_PurchaseJournal" extends "Purchase Journal" //Extends p
         addlast(Control1)
         {
             //>> Add new controls based on new Shortcut dimension array
-            field(ExtendedShortcutDimCode3; ExtendedShortcutDimCode[3])
+            field(ExtendedShortcutDimCode3; Rec.ExtendedShortcutDimCode[3])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,3';
@@ -26,7 +26,7 @@ pageextension 50308 "ACO_PurchaseJournal" extends "Purchase Journal" //Extends p
                     ApplyJnlDimCombination(3, ExtendedShortcutDimCode[3])
                 end;
             }
-            field(ExtendedShortcutDimCode4; ExtendedShortcutDimCode[4])
+            field(ExtendedShortcutDimCode4; Rec.ExtendedShortcutDimCode[4])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,4';
@@ -40,7 +40,7 @@ pageextension 50308 "ACO_PurchaseJournal" extends "Purchase Journal" //Extends p
                     ApplyJnlDimCombination(4, ExtendedShortcutDimCode[4])
                 end;
             }
-            field(ExtendedShortcutDimCode5; ExtendedShortcutDimCode[5])
+            field(ExtendedShortcutDimCode5; Rec.ExtendedShortcutDimCode[5])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,5';
@@ -54,7 +54,7 @@ pageextension 50308 "ACO_PurchaseJournal" extends "Purchase Journal" //Extends p
                     ApplyJnlDimCombination(5, ExtendedShortcutDimCode[5])
                 end;
             }
-            field(ExtendedShortcutDimCode6; ExtendedShortcutDimCode[6])
+            field(ExtendedShortcutDimCode6; Rec.ExtendedShortcutDimCode[6])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,6';
@@ -68,7 +68,7 @@ pageextension 50308 "ACO_PurchaseJournal" extends "Purchase Journal" //Extends p
                     ApplyJnlDimCombination(6, ExtendedShortcutDimCode[6])
                 end;
             }
-            field(ExtendedShortcutDimCode7; ExtendedShortcutDimCode[7])
+            field(ExtendedShortcutDimCode7; Rec.ExtendedShortcutDimCode[7])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,7';
@@ -82,7 +82,7 @@ pageextension 50308 "ACO_PurchaseJournal" extends "Purchase Journal" //Extends p
                     ApplyJnlDimCombination(7, ExtendedShortcutDimCode[7])
                 end;
             }
-            field(ExtendedShortcutDimCode8; ExtendedShortcutDimCode[8])
+            field(ExtendedShortcutDimCode8; Rec.ExtendedShortcutDimCode[8])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,8';
@@ -102,7 +102,7 @@ pageextension 50308 "ACO_PurchaseJournal" extends "Purchase Journal" //Extends p
         //>>3.1.0.2018
         addbefore("On Hold")
         {
-            field(ACO_DisputeCode; ACO_DisputeCode)
+            field(ACO_DisputeCode; Rec.ACO_DisputeCode)
             {
                 ApplicationArea = all;
                 trigger OnValidate();
@@ -110,7 +110,7 @@ pageextension 50308 "ACO_PurchaseJournal" extends "Purchase Journal" //Extends p
                     CalcFields(ACO_DisputeName);
                 end;
             }
-            field(ACO_DisputeName; ACO_DisputeName)
+            field(ACO_DisputeName; Rec.ACO_DisputeName)
             {
                 ApplicationArea = all;
                 Editable = false;
@@ -344,3 +344,5 @@ pageextension 50308 "ACO_PurchaseJournal" extends "Purchase Journal" //Extends p
 
 
 }
+
+

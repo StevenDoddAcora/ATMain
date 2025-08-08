@@ -11,41 +11,41 @@ pageextension 50300 "ACO_CustomerList" extends "Customer List"
     {
         addlast(Control1)
         {
-            field(ACO_Exposure; ACO_Exposure)
+            field(ACO_Exposure; Rec.ACO_Exposure)
             {
                 ApplicationArea = All;
                 Editable = false;
             }
             //>>1.2.0.2018
-            field(ACO_ActiveExchangeRateTCY; ACO_ActiveExchangeRateTCY)
+            field(ACO_ActiveExchangeRateTCY; Rec.ACO_ActiveExchangeRateTCY)
             {
                 ApplicationArea = All;
                 ToolTip = 'Field value is updated by the update routine. Shows the active exchange rate for the default Trading Currency at the Last Update Date';
                 Editable = false;
                 BlankZero = false;
             }
-            field(ACO_CreditLimitTCY; ACO_CreditLimitTCY)
+            field(ACO_CreditLimitTCY; Rec.ACO_CreditLimitTCY)
             {
                 ApplicationArea = All;
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: Credit Limit (LCY) x Active Exchange Rate for the Trading Currency';
                 Editable = false;
                 BlankZero = false;
             }
-            field(ACO_ActiveExchangeRateECY; ACO_ActiveExchangeRateECY)
+            field(ACO_ActiveExchangeRateECY; Rec.ACO_ActiveExchangeRateECY)
             {
                 ApplicationArea = All;
                 ToolTip = 'Field value is updated by the update routine. Shows the active exchange rate for the Export Currency at the Last Update Date';
                 Editable = false;
                 BlankZero = false;
             }
-            field(ACO_CreditLimitECY; ACO_CreditLimitECY)
+            field(ACO_CreditLimitECY; Rec.ACO_CreditLimitECY)
             {
                 ApplicationArea = All;
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: Credit Limit (LCY) x Active Exchange Rate for the Export Currency';
                 Editable = false;
                 BlankZero = false;
             }
-            field(ACO_BalanceECY; ACO_BalanceECY)
+            field(ACO_BalanceECY; Rec.ACO_BalanceECY)
             {
                 ApplicationArea = All;
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: Balance (LCY) x Active Exchange Rate for the Export Currency';
@@ -58,13 +58,13 @@ pageextension 50300 "ACO_CustomerList" extends "Customer List"
                 //     OpenCurrCustomerLedgerEntries('', Today);
                 // end;
             }
-            field(ACO_BalanceCurrency1; ACO_BalanceCurrency1)
+            field(ACO_BalanceCurrency1; Rec.ACO_BalanceCurrency1)
             {
                 ApplicationArea = All;
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: SUM of Remaining Amount of the open Customer Ledger Entries wher Currency field is Customer Report Currency 1';
                 Editable = false;
                 BlankZero = false;
-                CaptionClass = GetFieldCaptionClass(FieldNo(ACO_BalanceCurrency1));
+                CaptionClass = Rec.GetFieldCaptionClass(FieldNo(Rec.ACO_BalanceCurrency1));
 
                 trigger OnDrillDown();
                 begin
@@ -72,13 +72,13 @@ pageextension 50300 "ACO_CustomerList" extends "Customer List"
                     OpenCurrCustomerLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency1, Today);
                 end;
             }
-            field(ACO_BalanceCurrency2; ACO_BalanceCurrency2)
+            field(ACO_BalanceCurrency2; Rec.ACO_BalanceCurrency2)
             {
                 ApplicationArea = All;
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: SUM of Remaining Amount of the open Customer Ledger Entries wher Currency field is Customer Report Currency 2';
                 Editable = false;
                 BlankZero = false;
-                CaptionClass = GetFieldCaptionClass(FieldNo(ACO_BalanceCurrency2));
+                CaptionClass = Rec.GetFieldCaptionClass(FieldNo(Rec.ACO_BalanceCurrency2));
 
                 trigger OnDrillDown();
                 begin
@@ -86,13 +86,13 @@ pageextension 50300 "ACO_CustomerList" extends "Customer List"
                     OpenCurrCustomerLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency2, Today);
                 end;
             }
-            field(ACO_BalanceCurrency3; ACO_BalanceCurrency3)
+            field(ACO_BalanceCurrency3; Rec.ACO_BalanceCurrency3)
             {
                 ApplicationArea = All;
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: SUM of Remaining Amount of the open Customer Ledger Entries wher Currency field is Customer Report Currency 3';
                 Editable = false;
                 BlankZero = false;
-                CaptionClass = GetFieldCaptionClass(FieldNo(ACO_BalanceCurrency3));
+                CaptionClass = Rec.GetFieldCaptionClass(FieldNo(Rec.ACO_BalanceCurrency3));
 
                 trigger OnDrillDown();
                 begin
@@ -100,13 +100,13 @@ pageextension 50300 "ACO_CustomerList" extends "Customer List"
                     OpenCurrCustomerLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency3, Today);
                 end;
             }
-            field(ACO_LastCurrencyDataUpdateDate; ACO_LastCurrencyDataUpdateDate)
+            field(ACO_LastCurrencyDataUpdateDate; Rec.ACO_LastCurrencyDataUpdateDate)
             {
                 ApplicationArea = All;
                 ToolTip = 'Field value is updated by the update routine. Shows the last update date when the currency data has been recalculated (i.e. Balance GBP,USD,EUR,TCY,ECY)';
                 Editable = false;
             }
-            field(ACO_LastCurrencyDataUpdateTime; ACO_LastCurrencyDataUpdateTime)
+            field(ACO_LastCurrencyDataUpdateTime; Rec.ACO_LastCurrencyDataUpdateTime)
             {
                 ApplicationArea = All;
                 ToolTip = 'Field value is updated by the update routine. Shows the last update date when the currency data has been recalculated (i.e. Balance GBP,USD,EUR,TCY,ECY)';
@@ -115,7 +115,7 @@ pageextension 50300 "ACO_CustomerList" extends "Customer List"
             //<<1.2.0.2018
             //>>2.0.0.2018
             //*** This field has been made invisible as the calculation happen on card level
-            // field(ACO_AvgCollectionPeriod;ACO_AvgCollectionPeriod){
+            // field(ACO_AvgCollectionPeriod; Rec.ACO_AvgCollectionPeriod){
             //     ApplicationArea = All;
             //     ToolTip = 'It is use to calcluate using the same source values as the Customer Entry Statistics page fields, but using the new Additional Setup field to determine the time.period filter.';
             // }
@@ -125,7 +125,7 @@ pageextension 50300 "ACO_CustomerList" extends "Customer List"
         addafter("Country/Region Code")
         {
             //>>2.3.0.2018
-            field(ACO_CountryRegionName; ACO_CountryRegionName)
+            field(ACO_CountryRegionName; Rec.ACO_CountryRegionName)
             {
                 Visible = false;
                 Editable = false;
@@ -138,8 +138,8 @@ pageextension 50300 "ACO_CustomerList" extends "Customer List"
             //>>2.0.0.2018
             part(ACO_CustomerEntryStatFactBox; ACO_CustomerEntryStatFactBox)
             {
-                SubPageLink = "No." = FIELD("No.");
-                ApplicationArea = all;
+                SubPageLink = "No." = field("No.");
+                Rec.ApplicationArea = all;
             }
             //<<2.0.0.2018
         }
@@ -197,3 +197,5 @@ pageextension 50300 "ACO_CustomerList" extends "Customer List"
     end;
     //<<1.2.0.2018
 }
+
+

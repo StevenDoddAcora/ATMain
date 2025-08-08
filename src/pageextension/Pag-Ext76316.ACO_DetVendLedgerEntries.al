@@ -9,7 +9,7 @@ pageextension 50316 "ACO_DetVendLedgerEntries" extends "Detailed Vendor Ledg. En
         addafter("Posting Date")
         {
             //>>2.3.0.2018
-            field(ACO_DocumentDate; ACO_DocumentDate)
+            field(ACO_DocumentDate; Rec.ACO_DocumentDate)
             {
                 Visible = true;
                 Editable = false;
@@ -23,3 +23,4 @@ pageextension 50316 "ACO_DetVendLedgerEntries" extends "Detailed Vendor Ledg. En
         // Nothing in here yet
     }
 }
+

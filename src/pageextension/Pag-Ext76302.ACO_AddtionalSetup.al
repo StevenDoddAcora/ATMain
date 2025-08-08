@@ -19,7 +19,7 @@ pageextension 50302 "ACO_AddtionalSetup" extends ACO_AdditionalSetup
                 Visible = true;
 
                 //>>2.0.0.2018
-                field(ACO_AvgCollectionPeriodCalc; ACO_AvgCollectionPeriodCalc)
+                field(ACO_AvgCollectionPeriodCalc; Rec.ACO_AvgCollectionPeriodCalc)
                 {
                     ApplicationArea = All;
                     ToolTip = 'It indicates how the Customer Average Days to Pay will be calculated';
@@ -27,17 +27,17 @@ pageextension 50302 "ACO_AddtionalSetup" extends ACO_AdditionalSetup
                 //<<2.0.0.2018
 
                 //>>2.2.0.2018
-                field(ACO_CustomerReportCurrency1; ACO_CustomerReportCurrency1)
+                field(ACO_CustomerReportCurrency1; Rec.ACO_CustomerReportCurrency1)
                 {
                     ApplicationArea = All;
                     ToolTip = 'It specifies the currency code which will be used for the Customer/Vendor Balance 1 calculation';
                 }
-                field(ACO_CustomerReportCurrency2; ACO_CustomerReportCurrency2)
+                field(ACO_CustomerReportCurrency2; Rec.ACO_CustomerReportCurrency2)
                 {
                     ApplicationArea = All;
                     ToolTip = 'It specifies the currency code which will be used for the Customer/Vendor Balance 2 calculation';
                 }
-                field(ACO_CustomerReportCurrency3; ACO_CustomerReportCurrency3)
+                field(ACO_CustomerReportCurrency3; Rec.ACO_CustomerReportCurrency3)
                 {
                     ApplicationArea = All;
                     ToolTip = 'It specifies the currency code which will be used for the Customer/Vendor Balance 3 calculation';
@@ -60,13 +60,13 @@ pageextension 50302 "ACO_AddtionalSetup" extends ACO_AdditionalSetup
                 Group(ACO_ExposureGroup)
                 {
                     caption = 'Exposure';
-                    field(ACO_ExposureFileSource; ACO_ExposureFileSource)
+                    field(ACO_ExposureFileSource; Rec.ACO_ExposureFileSource)
                     {
                         ApplicationArea = All;
                         ToolTip = 'It specifies the File location to be used when importing exposure Files (Quantum to NAV)';
                         Width = 30;
                     }
-                    field(ACO_ExposureFileProcessed; ACO_ExposureFileProcessed)
+                    field(ACO_ExposureFileProcessed; Rec.ACO_ExposureFileProcessed)
                     {
                         ApplicationArea = All;
                         ToolTip = 'It specifies the File location to be used for archive imported exposure Files (Quantum to NAV)';
@@ -77,40 +77,40 @@ pageextension 50302 "ACO_AddtionalSetup" extends ACO_AdditionalSetup
                 Group(ACO_InvoiceGroup)
                 {
                     caption = 'Invoice';
-                    field(ACO_InvoiceFileSource; ACO_InvoiceFileSource)
+                    field(ACO_InvoiceFileSource; Rec.ACO_InvoiceFileSource)
                     {
                         ApplicationArea = All;
                         ToolTip = 'It specifies the File location to be used when importing Invoice Files (Quantum to NAV)';
                         Width = 30;
                     }
-                    field(ACO_InvoiceFileProcessed; ACO_InvoiceFileProcessed)
+                    field(ACO_InvoiceFileProcessed; Rec.ACO_InvoiceFileProcessed)
                     {
                         ApplicationArea = All;
                         ToolTip = 'It specifies the File location to be used for archive imported Invoice Files (Quantum to NAV)';
                         Width = 30;
                     }
-                    field(ACO_ImportedInvoicePostedSeriesNo; ACO_ImportedInvoicePostedSeriesNo)
+                    field(ACO_ImportedInvoicePostedSeriesNo; Rec.ACO_ImportedInvoicePostedSeriesNo)
                     {
                         ApplicationArea = All;
                         ToolTip = 'The series no is used for the posting purose and it should be configured as manual numbers only';
                     }
-                    field(ACO_AutoPostInvoiceFile; ACO_AutoPostInvoiceFile)
+                    field(ACO_AutoPostInvoiceFile; Rec.ACO_AutoPostInvoiceFile)
                     {
                         ApplicationArea = All;
                         ToolTip = 'It specifies if the created invoice documents should be autoposted.';
                     }
-                    field(ACO_DefaultZeroLineItemNo; ACO_DefaultZeroLineItemNo)
+                    field(ACO_DefaultZeroLineItemNo; Rec.ACO_DefaultZeroLineItemNo)
                     {
                         ApplicationArea = All;
                         ToolTip = 'Used to determine the default Item No. to be used for Zero Invoice Line imports if a different Item No.is not defined on the customer record';
                     }
                     //>>2.2.3.2018
-                    field(ACO_UnitPriceRoundToZeroTol; ACO_UnitPriceRoundToZeroTol)
+                    field(ACO_UnitPriceRoundToZeroTol; Rec.ACO_UnitPriceRoundToZeroTol)
                     {
                         ApplicationArea = All;
                         ToolTip = 'If during Invoice import the unit price is in below (+-) Unit Price Round to 0 Tolerance the system will round the value to 0';
                     }
-                    field(ACO_LastInvoiceImportNo; ACO_LastInvoiceImportNo)
+                    field(ACO_LastInvoiceImportNo; Rec.ACO_LastInvoiceImportNo)
                     {
                         ApplicationArea = All;
                         ToolTip = 'It specifies the last imported file No for Invoice Import';
@@ -121,30 +121,30 @@ pageextension 50302 "ACO_AddtionalSetup" extends ACO_AdditionalSetup
                 Group(ACO_CreditGroup)
                 {
                     caption = 'Credit';
-                    field(ACO_CreditFileSource; ACO_CreditFileSource)
+                    field(ACO_CreditFileSource; Rec.ACO_CreditFileSource)
                     {
                         ApplicationArea = All;
                         ToolTip = 'It specifies the File location to be used when importing Credit Files (Quantum to NAV)';
                         Width = 30;
                     }
-                    field(ACO_CreditFileProcessed; ACO_CreditFileProcessed)
+                    field(ACO_CreditFileProcessed; Rec.ACO_CreditFileProcessed)
                     {
                         ApplicationArea = All;
                         ToolTip = 'It specifies the File location to be used for archive imported Credit Files (Quantum to NAV)';
                         Width = 30;
                     }
-                    field(ACO_ImportedCreditPostedSeriesNo; ACO_ImportedCreditPostedSeriesNo)
+                    field(ACO_ImportedCreditPostedSeriesNo; Rec.ACO_ImportedCreditPostedSeriesNo)
                     {
                         ApplicationArea = All;
                         ToolTip = 'The series no is used for the posting purose and it should be configured as manual numbers only';
                     }
-                    field(ACO_AutoPostCreditFile; ACO_AutoPostCreditFile)
+                    field(ACO_AutoPostCreditFile; Rec.ACO_AutoPostCreditFile)
                     {
                         ApplicationArea = All;
                         ToolTip = 'It specifies if the created credit documents should be autoposted.';
                     }
                     //>>2.2.3.2018
-                    field(ACO_LastCreditImportNo; ACO_LastCreditImportNo)
+                    field(ACO_LastCreditImportNo; Rec.ACO_LastCreditImportNo)
                     {
                         ApplicationArea = All;
                         ToolTip = 'It specifies the last imported file No for Credit Import';
@@ -158,13 +158,13 @@ pageextension 50302 "ACO_AddtionalSetup" extends ACO_AdditionalSetup
                 Caption = 'Quantum Export';
                 Visible = true;
                 //>>1.2.0.2018
-                field(ACO_QuantumExportLocation; ACO_QuantumExportLocation)
+                field(ACO_QuantumExportLocation; Rec.ACO_QuantumExportLocation)
                 {
                     ApplicationArea = All;
                     ToolTip = 'It specifies the file location to be used for exporting Quantum files (NAV to Quantum)';
                     Width = 30;
                 }
-                field(ACO_ExportCurrency; ACO_ExportCurrency)
+                field(ACO_ExportCurrency; Rec.ACO_ExportCurrency)
                 {
                     ApplicationArea = All;
                     ToolTip = 'It specifies the currency code the Quantum export should used for the values exported (NAV to Quantum)';
@@ -229,4 +229,5 @@ pageextension 50302 "ACO_AddtionalSetup" extends ACO_AdditionalSetup
         //Any other init data for testing here:
     end;
 }
+
 
