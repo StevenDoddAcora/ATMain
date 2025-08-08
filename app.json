@@ -1,0 +1,41 @@
+{
+  "id": "fd30994e-4be9-4fd7-ad05-2953d66c1a93",
+  "name": "AvTrade Core Application",
+  "publisher": "Acora Limited",
+  "version": "1.0.0.0",
+  "brief": "AvTrade aviation component trading core functionality",
+  "description": "Business Central Extension for AvTrade aviation component trading business. Provides core functionality for customer management, extended dimensions, and business processes specific to aviation aftermarket operations.",
+  "privacyStatement": "https://www.acora.com/privacy-policy",
+  "EULA": "https://www.acora.com/terms-conditions",
+  "help": "https://www.acora.com/extensions-support-2",
+  "url": "https://www.acora.com/extensions-support-2",
+  "logo": "logo/icon.png",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "26.0.0.0",
+  "application": "26.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50899
+    }
+  ],
+  "target": "OnPrem",
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "15.0",
+  "features": [
+    "NoImplicitWith"
+  ],
+  "preprocessorSymbols": [],
+  "internalsVisibleTo": [
+    {
+      "id": "8e7f1c2d-4a3b-4c5d-9e8f-1a2b3c4d5e6f",
+      "name": "Avtrade Reports and Integration",
+      "publisher": "Acora Limited"
+    }
+  ]
+}
