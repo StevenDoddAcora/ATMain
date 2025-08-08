@@ -1,4 +1,4 @@
-pageextension 50303 "ACO_SessionList" extends "Session List"
+pageextension 50303 "ACO_SessionList" extends "Active Sessions"
 {
     //#region Documentation
     // 1.1.0.2018 LBR 11/06/2019 - This is temp change to allow to kill user session

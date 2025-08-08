@@ -10,16 +10,16 @@ pageextension 50321 "ACO_PostedPurchInvoice" extends "Posted Purchase Invoice"
         {
             field(ACO_DisputeCode; Rec.ACO_DisputeCode)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Editable = false;
                 trigger OnValidate();
                 begin
-                    CalcFields(ACO_DisputeName);
+                    Rec.CalcFields(ACO_DisputeName);
                 end;
             }
             field(ACO_DisputeName; Rec.ACO_DisputeName)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Editable = false;
             }
         }

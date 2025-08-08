@@ -23,7 +23,7 @@ pageextension 50313 "ACO_BankAccountCard" extends "Bank Account Card"
             }
             field(ACO_PaymentMethodCode; Rec.ACO_PaymentMethodCode)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
             }
         }
         //<<2.2.5.2018

@@ -39,12 +39,12 @@ pageextension 50312 "ACO_VendorCard" extends "Vendor Card"
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: SUM of Remaining Amount of the open Vendor Ledger Entries where Currency field is Customer/Vendor Report Currency 1';
                 Editable = false;
                 BlankZero = false;
-                CaptionClass = Rec.GetFieldCaptionClass(FieldNo(Rec.ACO_BalanceCurrency1));
+                CaptionClass = Rec.GetFieldCaptionClass(Rec.FieldNo(ACO_BalanceCurrency1));
 
                 trigger OnDrillDown();
                 begin
                     GetGenrealLegerSetup();
-                    OpenCurrVendorLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency1, Today);
+                    Rec.OpenCurrVendorLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency1, Today);
                 end;
             }
             field(ACO_BalanceCurrency2; Rec.ACO_BalanceCurrency2)
@@ -53,12 +53,12 @@ pageextension 50312 "ACO_VendorCard" extends "Vendor Card"
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: SUM of Remaining Amount of the open Vendor Ledger Entries where Currency field is Customer/Vendor Report Currency 2';
                 Editable = false;
                 BlankZero = false;
-                CaptionClass = Rec.GetFieldCaptionClass(FieldNo(Rec.ACO_BalanceCurrency2));
+                CaptionClass = Rec.GetFieldCaptionClass(Rec.FieldNo(ACO_BalanceCurrency2));
 
                 trigger OnDrillDown();
                 begin
                     GetAdditionalSetup();
-                    OpenCurrVendorLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency2, Today);
+                    Rec.OpenCurrVendorLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency2, Today);
                 end;
             }
             field(ACO_BalanceCurrency3; Rec.ACO_BalanceCurrency3)
@@ -67,12 +67,12 @@ pageextension 50312 "ACO_VendorCard" extends "Vendor Card"
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: SUM of Remaining Amount of the open Vendor Ledger Entries where Currency field is Customer/Vendor Report Currency 3';
                 Editable = false;
                 BlankZero = false;
-                CaptionClass = Rec.GetFieldCaptionClass(FieldNo(Rec.ACO_BalanceCurrency3));
+                CaptionClass = Rec.GetFieldCaptionClass(Rec.FieldNo(ACO_BalanceCurrency3));
 
                 trigger OnDrillDown();
                 begin
                     GetAdditionalSetup();
-                    OpenCurrVendorLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency3, Today);
+                    Rec.OpenCurrVendorLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency3, Today);
                 end;
             }
             field(ACO_LastCurrencyDataUpdateDate; Rec.ACO_LastCurrencyDataUpdateDate)
@@ -123,7 +123,7 @@ pageextension 50312 "ACO_VendorCard" extends "Vendor Card"
                     VendorRec: record Vendor;
                     RecalcVendCurrencyData: Report ACO_RecalcVendCurrencyData;
                 begin
-                    VendorRec.SETRANGE("No.", "No.");
+                    VendorRec.SetRange("No.", Rec."No.");
 
                     RecalcVendCurrencyData.SetTableView(VendorRec);
                     RecalcVendCurrencyData.RunModal();

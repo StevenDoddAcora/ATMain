@@ -19,7 +19,7 @@ report 50403 "ACO_SuggestVendorPayments"
             trigger OnAfterGetRecord();
             begin
                 CLEAR(VendorBalance);
-                CALCFIELDS("Balance (LCY)");
+                CalcFields("Balance (LCY)");
                 VendorBalance := "Balance (LCY)";
 
                 //>>2.3.1.2018
@@ -43,11 +43,11 @@ report 50403 "ACO_SuggestVendorPayments"
                     RESET;
                     COPYFILTERS(Vend2);
                     SETCURRENTKEY(Priority);
-                    SETRANGE(Priority, 0);
-                    if FIND('-') then
+                    SetRange(Priority, 0);
+                    if Find('-') then
                         repeat
                             CLEAR(VendorBalance);
-                            CALCFIELDS("Balance (LCY)");
+                            CalcFields("Balance (LCY)");
                             VendorBalance := "Balance (LCY)";
                             if VendorBalance > 0 then begin
                                 Window.UPDATE(1, "No.");
@@ -63,13 +63,13 @@ report 50403 "ACO_SuggestVendorPayments"
                     RESET;
                     COPYFILTERS(Vend2);
                     Window2.OPEN(Text007);
-                    if FIND('-') then
+                    if Find('-') then
                         repeat
                             CLEAR(VendorBalance);
-                            CALCFIELDS("Balance (LCY)");
+                            CalcFields("Balance (LCY)");
                             VendorBalance := "Balance (LCY)";
                             Window2.UPDATE(1, "No.");
-                            PayableVendLedgEntry.SETRANGE("Vendor No.", "No.");
+                            PayableVendLedgEntry.SetRange("Vendor No.", "No.");
                             if VendorBalance > 0 then begin
                                 GetVendLedgEntries(true, true);
                                 GetVendLedgEntries(false, true);
@@ -79,7 +79,7 @@ report 50403 "ACO_SuggestVendorPayments"
                         until (NEXT = 0) or StopPayments;
                     Window2.CLOSE;
                 end else
-                    if FIND('-') then
+                    if Find('-') then
                         repeat
                             ClearNegative;
                         until NEXT = 0;
@@ -88,8 +88,8 @@ report 50403 "ACO_SuggestVendorPayments"
                 GenJnlLine.LOCKTABLE;
                 GenJnlTemplate.GET(GenJnlLine."Journal Template Name");
                 GenJnlBatch.GET(GenJnlLine."Journal Template Name", GenJnlLine."Journal Batch Name");
-                GenJnlLine.SETRANGE("Journal Template Name", GenJnlLine."Journal Template Name");
-                GenJnlLine.SETRANGE("Journal Batch Name", GenJnlLine."Journal Batch Name");
+                GenJnlLine.SetRange("Journal Template Name", GenJnlLine."Journal Template Name");
+                GenJnlLine.SetRange("Journal Batch Name", GenJnlLine."Journal Batch Name");
                 if GenJnlLine.FindLast() then begin
                     LastLineNo := GenJnlLine."Line No.";
                     GenJnlLine.INIT;
@@ -98,10 +98,10 @@ report 50403 "ACO_SuggestVendorPayments"
                 Window2.OPEN(Text008);
 
                 PayableVendLedgEntry.RESET;
-                PayableVendLedgEntry.SETRANGE(Priority, 1, 2147483647);
+                PayableVendLedgEntry.SetRange(Priority, 1, 2147483647);
                 MakeGenJnlLines;
                 PayableVendLedgEntry.RESET;
-                PayableVendLedgEntry.SETRANGE(Priority, 0);
+                PayableVendLedgEntry.SetRange(Priority, 0);
                 MakeGenJnlLines;
                 PayableVendLedgEntry.RESET;
                 PayableVendLedgEntry.DELETEALL;
@@ -162,15 +162,15 @@ report 50403 "ACO_SuggestVendorPayments"
                 OriginalAmtAvailable := AmountAvailable;
                 if UsePriority then begin
                     SETCURRENTKEY(Priority);
-                    SETRANGE(Priority, 1, 2147483647);
+                    SetRange(Priority, 1, 2147483647);
                     UsePriority := true;
                 end;
                 Window.OPEN(Text006);
 
-                SelectedDim.SETRANGE("User ID", USERID);
-                SelectedDim.SETRANGE("Object Type", 3);
-                SelectedDim.SETRANGE("Object ID", REPORT::"Suggest Vendor Payments");
-                SummarizePerDim := SelectedDim.FIND('-') and SummarizePerVend;
+                SelectedDim.SetRange("User ID", USERID);
+                SelectedDim.SetRange("Object Type", 3);
+                SelectedDim.SetRange("Object ID", REPORT::"Suggest Vendor Payments");
+                SummarizePerDim := SelectedDim.Find('-') and SummarizePerVend;
 
                 NextEntryNo := 1;
             end;
@@ -541,8 +541,8 @@ report 50403 "ACO_SuggestVendorPayments"
         BankAcc: Record "Bank Account";
         PayableVendLedgEntry: Record "Payable Vendor Ledger Entry" temporary;
         CompanyInformation: Record "Company Information";
-        TempPaymentBuffer: Record "Payment Buffer" temporary;
-        OldTempPaymentBuffer: Record "Payment Buffer" temporary;
+        TempPaymentBuffer: Record "Vendor Payment Buffer" temporary;
+        OldTempPaymentBuffer: Record "Vendor Payment Buffer" temporary;
         SelectedDim: Record "Selected Dimension";
         VendorLedgEntryTemp: Record "Vendor Ledger Entry" temporary;
         TempErrorMessage: Record "Error Message" temporary;
@@ -649,24 +649,24 @@ report 50403 "ACO_SuggestVendorPayments"
     begin
         VendLedgEntry.RESET;
         VendLedgEntry.SETCURRENTKEY("Vendor No.", Open, Positive, "Due Date");
-        VendLedgEntry.SETRANGE("Vendor No.", Vendor."No.");
-        VendLedgEntry.SETRANGE(Open, true);
-        VendLedgEntry.SETRANGE(Positive, Positive);
-        VendLedgEntry.SETRANGE("Applies-to ID", '');
+        VendLedgEntry.SetRange("Vendor No.", Vendor."No.");
+        VendLedgEntry.SetRange(Open, true);
+        VendLedgEntry.SetRange(Positive, Positive);
+        VendLedgEntry.SetRange("Applies-to ID", '');
         if Future then begin
-            VendLedgEntry.SETRANGE("Due Date", LastDueDateToPayReq + 1, DMY2DATE(31, 12, 9999));
-            VendLedgEntry.SETRANGE("Pmt. Discount Date", PostingDate, LastDueDateToPayReq);
-            VendLedgEntry.SETFILTER("Remaining Pmt. Disc. Possible", '<>0');
+            VendLedgEntry.SetRange("Due Date", LastDueDateToPayReq + 1, DMY2DATE(31, 12, 9999));
+            VendLedgEntry.SetRange("Pmt. Discount Date", PostingDate, LastDueDateToPayReq);
+            VendLedgEntry.SetFilter("Remaining Pmt. Disc. Possible", '<>0');
         end else
-            VendLedgEntry.SETRANGE("Due Date", 0D, LastDueDateToPayReq);
+            VendLedgEntry.SetRange("Due Date", 0D, LastDueDateToPayReq);
         if SkipExportedPayments then
-            VendLedgEntry.SETRANGE("Exported to Payment File", false);
-        VendLedgEntry.SETRANGE("On Hold", '');
-        VendLedgEntry.SETFILTER("Currency Code", Vendor.GETFILTER("Currency Filter"));
-        VendLedgEntry.SETFILTER("Global Dimension 1 Code", Vendor.GETFILTER("Global Dimension 1 Filter"));
-        VendLedgEntry.SETFILTER("Global Dimension 2 Code", Vendor.GETFILTER("Global Dimension 2 Filter"));
+            VendLedgEntry.SetRange("Exported to Payment File", false);
+        VendLedgEntry.SetRange("On Hold", '');
+        VendLedgEntry.SetFilter("Currency Code", Vendor.GETFILTER("Currency Filter"));
+        VendLedgEntry.SetFilter("Global Dimension 1 Code", Vendor.GETFILTER("Global Dimension 1 Filter"));
+        VendLedgEntry.SetFilter("Global Dimension 2 Code", Vendor.GETFILTER("Global Dimension 2 Filter"));
 
-        if VendLedgEntry.FIND('-') then
+        if VendLedgEntry.Find('-') then
             repeat
                 SaveAmount;
                 if VendLedgEntry."Accepted Pmt. Disc. Tolerance" or
@@ -703,7 +703,7 @@ report 50403 "ACO_SuggestVendorPayments"
             "VAT Prod. Posting Group" := '';
             VALIDATE("Currency Code", VendLedgEntry."Currency Code");
             VALIDATE("Payment Terms Code");
-            VendLedgEntry.CALCFIELDS("Remaining Amount");
+            VendLedgEntry.CalcFields("Remaining Amount");
             if PaymentToleranceMgt.CheckCalcPmtDiscGenJnlVend(GenJnlLine, VendLedgEntry, 0, false) then
                 Amount := -(VendLedgEntry."Remaining Amount" - VendLedgEntry."Remaining Pmt. Disc. Possible")
             else
@@ -732,10 +732,10 @@ report 50403 "ACO_SuggestVendorPayments"
         CurrencyBalance: Decimal;
         PrevCurrency: Code[10];
     begin
-        PayableVendLedgEntry.SETRANGE("Vendor No.", Vendor."No.");
-        PayableVendLedgEntry.SETRANGE(Future, Future);
+        PayableVendLedgEntry.SetRange("Vendor No.", Vendor."No.");
+        PayableVendLedgEntry.SetRange(Future, Future);
 
-        if PayableVendLedgEntry.FIND('-') then begin
+        if PayableVendLedgEntry.Find('-') then begin
             repeat
                 if PayableVendLedgEntry."Currency Code" <> PrevCurrency then begin
                     if CurrencyBalance > 0 then
@@ -777,10 +777,10 @@ report 50403 "ACO_SuggestVendorPayments"
             RemainingAmtAvailable := OriginalAmtAvailable;
             RemovePaymentsAboveLimit(PayableVendLedgEntry, RemainingAmtAvailable);
         end;
-        if PayableVendLedgEntry.FIND('-') then
+        if PayableVendLedgEntry.Find('-') then
             repeat
-                PayableVendLedgEntry.SETRANGE("Vendor No.", PayableVendLedgEntry."Vendor No.");
-                PayableVendLedgEntry.FIND('-');
+                PayableVendLedgEntry.SetRange("Vendor No.", PayableVendLedgEntry."Vendor No.");
+                PayableVendLedgEntry.Find('-');
                 repeat
                     VendLedgEntry.GET(PayableVendLedgEntry."Vendor Ledg. Entry No.");
                     SetPostingDate(GenJnlLine1, VendLedgEntry."Due Date", PostingDate);
@@ -796,7 +796,7 @@ report 50403 "ACO_SuggestVendorPayments"
 
                         SetTempPaymentBufferDims(DimBuf);
 
-                        VendLedgEntry.CALCFIELDS("Remaining Amount");
+                        VendLedgEntry.CalcFields("Remaining Amount");
 
                         if SummarizePerVend then begin
                             TempPaymentBuffer."Vendor Ledg. Entry No." := 0;
@@ -839,18 +839,18 @@ report 50403 "ACO_SuggestVendorPayments"
 
                 until not PayableVendLedgEntry.FindSet();
                 PayableVendLedgEntry.DELETEALL;
-                PayableVendLedgEntry.SETRANGE("Vendor No.");
-            until not PayableVendLedgEntry.FIND('-');
+                PayableVendLedgEntry.SetRange("Vendor No.");
+            until not PayableVendLedgEntry.Find('-');
 
         CLEAR(OldTempPaymentBuffer);
         TempPaymentBuffer.SETCURRENTKEY("Document No.");
-        TempPaymentBuffer.SETFILTER(
+        TempPaymentBuffer.SetFilter(
           "Vendor Ledg. Entry Doc. Type", '<>%1&<>%2', TempPaymentBuffer."Vendor Ledg. Entry Doc. Type"::Refund,
           TempPaymentBuffer."Vendor Ledg. Entry Doc. Type"::Payment);
 
         CollectExistingPaymentLines;
 
-        if TempPaymentBuffer.FIND('-') then
+        if TempPaymentBuffer.Find('-') then
             repeat
                 with GenJnlLine do begin
                     INIT;
@@ -961,14 +961,14 @@ report 50403 "ACO_SuggestVendorPayments"
                 DimSetIDArr[1] := "Dimension Set ID";
                 DimSetIDArr[2] := NewDimensionID;
                 "Dimension Set ID" :=
-                  DimMgt.GetCombinedDimensionSetID(DimSetIDArr, "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code");
+                  DimMgt.GetCombinedDimensionSetID(DimSetIDArr, Rec."Shortcut Dimension 1 Code", Rec."Shortcut Dimension 2 Code");
             end;
 
             if SummarizePerVend then begin
                 DimMgt.GetDimensionSet(TempDimSetEntry, "Dimension Set ID");
                 if AdjustAgainstSelectedDim(TempDimSetEntry, TempDimSetEntry2) then
                     "Dimension Set ID" := DimMgt.GetDimensionSetID(TempDimSetEntry2);
-                DimMgt.UpdateGlobalDimFromDimSetID("Dimension Set ID", "Shortcut Dimension 1 Code",
+                DimMgt.UpdateGlobalDimFromDimSetID("Dimension Set ID", Rec."Shortcut Dimension 1 Code",
                   "Shortcut Dimension 2 Code");
             end;
         end;
@@ -984,7 +984,7 @@ report 50403 "ACO_SuggestVendorPayments"
                 //>>2.2.5.2018
                 //IF BankAcc."Currency Code" <> '' THEN
                 //<<2.2.5.2018
-                TmpPayableVendLedgEntry.SETRANGE("Currency Code", BankAcc."Currency Code");
+                TmpPayableVendLedgEntry.SetRange("Currency Code", BankAcc."Currency Code");
             end;
     end;
 
@@ -1009,13 +1009,13 @@ report 50403 "ACO_SuggestVendorPayments"
                 if BankAcc."Currency Code" <> '' then begin
                     TmpPayableVendLedgEntry2.RESET;
                     TmpPayableVendLedgEntry2.DELETEALL;
-                    if TmpPayableVendLedgEntry.FIND('-') then
+                    if TmpPayableVendLedgEntry.Find('-') then
                         repeat
                             TmpPayableVendLedgEntry2 := TmpPayableVendLedgEntry;
                             TmpPayableVendLedgEntry2.INSERT;
                         until TmpPayableVendLedgEntry.NEXT = 0;
 
-                    TmpPayableVendLedgEntry2.SETFILTER("Currency Code", '<>%1', BankAcc."Currency Code");
+                    TmpPayableVendLedgEntry2.SetFilter("Currency Code", '<>%1', BankAcc."Currency Code");
                     SeveralCurrencies := SeveralCurrencies or TmpPayableVendLedgEntry2.FindFirst();
 
                     if SeveralCurrencies then
@@ -1040,14 +1040,14 @@ report 50403 "ACO_SuggestVendorPayments"
         CurrencyBalance: Decimal;
     begin
         CLEAR(PayableVendLedgEntry);
-        PayableVendLedgEntry.SETRANGE("Vendor No.", Vendor."No.");
+        PayableVendLedgEntry.SetRange("Vendor No.", Vendor."No.");
 
         while PayableVendLedgEntry.NEXT <> 0 do begin
             TempCurrency.Code := PayableVendLedgEntry."Currency Code";
             CurrencyBalance := 0;
             if TempCurrency.INSERT then begin
                 PayableVendLedgEntry2 := PayableVendLedgEntry;
-                PayableVendLedgEntry.SETRANGE("Currency Code", PayableVendLedgEntry."Currency Code");
+                PayableVendLedgEntry.SetRange("Currency Code", PayableVendLedgEntry."Currency Code");
                 repeat
                     CurrencyBalance := CurrencyBalance + PayableVendLedgEntry."Amount (LCY)"
                 until PayableVendLedgEntry.NEXT = 0;
@@ -1055,7 +1055,7 @@ report 50403 "ACO_SuggestVendorPayments"
                     PayableVendLedgEntry.DELETEALL;
                     AmountAvailable += CurrencyBalance;
                 end;
-                PayableVendLedgEntry.SETRANGE("Currency Code");
+                PayableVendLedgEntry.SetRange("Currency Code");
                 PayableVendLedgEntry := PayableVendLedgEntry2;
             end;
         end;
@@ -1065,15 +1065,15 @@ report 50403 "ACO_SuggestVendorPayments"
     local procedure DimCodeIsInDimBuf(DimCode: Code[20]; DimBuf: Record "Dimension Buffer"): Boolean;
     begin
         DimBuf.RESET;
-        DimBuf.SETRANGE("Dimension Code", DimCode);
+        DimBuf.SetRange("Dimension Code", DimCode);
         exit(not DimBuf.ISEMPTY);
     end;
 
     local procedure RemovePaymentsAboveLimit(var PayableVendLedgEntry: Record "Payable Vendor Ledger Entry"; RemainingAmtAvailable: Decimal);
     begin
-        PayableVendLedgEntry.SETFILTER("Amount (LCY)", '>%1', RemainingAmtAvailable);
+        PayableVendLedgEntry.SetFilter("Amount (LCY)", '>%1', RemainingAmtAvailable);
         PayableVendLedgEntry.DELETEALL;
-        PayableVendLedgEntry.SETRANGE("Amount (LCY)");
+        PayableVendLedgEntry.SetRange("Amount (LCY)");
     end;
 
     local procedure InsertDimBuf(var DimBuf: Record "Dimension Buffer"; TableID: Integer; EntryNo: Integer; DimCode: Code[20]; DimValue: Code[20]);
@@ -1130,7 +1130,7 @@ report 50403 "ACO_SuggestVendorPayments"
     begin
         if SelectedDim.FindSet() then begin
             repeat
-                TempDimSetEntry.SETRANGE("Dimension Code", SelectedDim."Dimension Code");
+                TempDimSetEntry.SetRange("Dimension Code", SelectedDim."Dimension Code");
                 if TempDimSetEntry.FindFirst() then begin
                     TempDimSetEntry2.TRANSFERFIELDS(TempDimSetEntry, true);
                     TempDimSetEntry2.INSERT;
@@ -1149,7 +1149,7 @@ report 50403 "ACO_SuggestVendorPayments"
         if SummarizePerDim then begin
             DimBuf.RESET;
             DimBuf.DELETEALL;
-            if SelectedDim.FIND('-') then
+            if SelectedDim.Find('-') then
                 repeat
                     if DimSetEntry.GET(
                          VendLedgEntry."Dimension Set ID", SelectedDim."Dimension Code")
@@ -1188,12 +1188,12 @@ report 50403 "ACO_SuggestVendorPayments"
     var
         GenJnlLine4: Record "Gen. Journal Line";
     begin
-        GenJnlLine4.SETRANGE("Journal Template Name", GenJnlLine3."Journal Template Name");
-        GenJnlLine4.SETRANGE("Journal Batch Name", GenJnlLine3."Journal Batch Name");
-        GenJnlLine4.SETRANGE("Account Type", GenJnlLine4."Account Type"::Vendor);
-        GenJnlLine4.SETRANGE("Account No.", VendLedgEntry2."Vendor No.");
-        GenJnlLine4.SETRANGE("Applies-to Doc. Type", VendLedgEntry2."Document Type");
-        GenJnlLine4.SETRANGE("Applies-to Doc. No.", VendLedgEntry2."Document No.");
+        GenJnlLine4.SetRange("Journal Template Name", GenJnlLine3."Journal Template Name");
+        GenJnlLine4.SetRange("Journal Batch Name", GenJnlLine3."Journal Batch Name");
+        GenJnlLine4.SetRange("Account Type", GenJnlLine4."Account Type"::Vendor);
+        GenJnlLine4.SetRange("Account No.", VendLedgEntry2."Vendor No.");
+        GenJnlLine4.SetRange("Applies-to Doc. Type", VendLedgEntry2."Document Type");
+        GenJnlLine4.SetRange("Applies-to Doc. No.", VendLedgEntry2."Document No.");
         exit(not GenJnlLine4.ISEMPTY);
     end;
 
@@ -1217,11 +1217,11 @@ report 50403 "ACO_SuggestVendorPayments"
         if TempPaymentBuffer.FindSet() then
             repeat
                 LineFound := false;
-                GenJournalLine.SETRANGE("Document Type", GenJournalLine."Document Type"::Payment);
-                GenJournalLine.SETRANGE("Account Type", GenJournalLine."Account Type"::Vendor);
-                GenJournalLine.SETRANGE("Account No.", TempPaymentBuffer."Vendor No.");
-                GenJournalLine.SETRANGE("Applies-to Doc. Type", TempPaymentBuffer."Vendor Ledg. Entry Doc. Type");
-                GenJournalLine.SETRANGE("Applies-to Doc. No.", TempPaymentBuffer."Vendor Ledg. Entry Doc. No.");
+                GenJournalLine.SetRange("Document Type", GenJournalLine."Document Type"::Payment);
+                GenJournalLine.SetRange("Account Type", GenJournalLine."Account Type"::Vendor);
+                GenJournalLine.SetRange("Account No.", TempPaymentBuffer."Vendor No.");
+                GenJournalLine.SetRange("Applies-to Doc. Type", TempPaymentBuffer."Vendor Ledg. Entry Doc. Type");
+                GenJournalLine.SetRange("Applies-to Doc. No.", TempPaymentBuffer."Vendor Ledg. Entry Doc. No.");
                 if GenJournalLine.FindSet() then
                     repeat
                         if (GenJournalLine."Journal Batch Name" <> GenJnlLine."Journal Batch Name") or
@@ -1247,12 +1247,12 @@ report 50403 "ACO_SuggestVendorPayments"
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnUpdateTempBufferFromVendorLedgerEntry(var TempPaymentBuffer: Record "Payment Buffer" temporary; VendorLedgerEntry: Record "Vendor Ledger Entry");
+    local procedure OnUpdateTempBufferFromVendorLedgerEntry(var TempPaymentBuffer: Record "Vendor Payment Buffer" temporary; VendorLedgerEntry: Record "Vendor Ledger Entry");
     begin
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeUpdateGnlJnlLineDimensionsFromTempBuffer(var GenJournalLine: Record "Gen. Journal Line"; TempPaymentBuffer: Record "Payment Buffer" temporary);
+    local procedure OnBeforeUpdateGnlJnlLineDimensionsFromTempBuffer(var GenJournalLine: Record "Gen. Journal Line"; TempPaymentBuffer: Record "Vendor Payment Buffer" temporary);
     begin
     end;
 }

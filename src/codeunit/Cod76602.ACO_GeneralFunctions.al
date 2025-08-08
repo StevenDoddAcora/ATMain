@@ -122,15 +122,15 @@ codeunit 50602 "ACO_GeneralFunctions"
     begin
         GetGenrealLegerSetup();
 
-        DetailedVendLedgEntry.SETRANGE("Vendor No.", pVendorCode);
-        //DetailedCustLedgEntry.SETFILTER(COPYFILTER("Global Dimension 1 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 1");
-        //DetailedCustLedgEntry.SETFILTER(COPYFILTER("Global Dimension 2 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 2");
+        DetailedVendLedgEntry.SetRange("Vendor No.", pVendorCode);
+        //DetailedCustLedgEntry.SetFilter(COPYFILTER("Global Dimension 1 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 1");
+        //DetailedCustLedgEntry.SetFilter(COPYFILTER("Global Dimension 2 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 2");
         if (pDate <> 0D) then
-            DetailedVendLedgEntry.SETFILTER("Posting Date", '<=%1', pDate);
+            DetailedVendLedgEntry.SetFilter("Posting Date", '<=%1', pDate);
         if (pCurrencyCode = '') or (pCurrencyCode = GenLedgerSetup."LCY Code") then
-            DetailedVendLedgEntry.SETFILTER("Currency Code", '%1|%2', '', pCurrencyCode)
+            DetailedVendLedgEntry.SetFilter("Currency Code", '%1|%2', '', pCurrencyCode)
         else
-            DetailedVendLedgEntry.SETRANGE("Currency Code", pCurrencyCode);
+            DetailedVendLedgEntry.SetRange("Currency Code", pCurrencyCode);
         DetailedVendLedgEntry.CalcSums(Amount);
 
         exit(DetailedVendLedgEntry.Amount * -1);
@@ -180,7 +180,7 @@ codeunit 50602 "ACO_GeneralFunctions"
                     begin
                         DateRec.Reset();
                         DateRec.SetRange("Period Type", DateRec."Period Type"::Quarter);
-                        DateRec.Setfilter("Period Start", '<=%1', pDate);
+                        DateRec.SetFilter("Period Start", '<=%1', pDate);
                         DateRec.FindLast();
                         CustDateFilter[1] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
                     end;
@@ -188,7 +188,7 @@ codeunit 50602 "ACO_GeneralFunctions"
                     begin
                         DateRec.Reset();
                         DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
-                        DateRec.Setfilter("Period Start", '<=%1', pDate);
+                        DateRec.SetFilter("Period Start", '<=%1', pDate);
                         DateRec.FindLast();
                         CustDateFilter[1] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
                         //CustDateFilter[2]; // is this same as the this year calculation
@@ -198,7 +198,7 @@ codeunit 50602 "ACO_GeneralFunctions"
                         //>>3.0.4.2018
                         //DateRec.Reset();
                         //DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
-                        //DateRec.Setfilter("Period Start", '<=%1', pDate);
+                        //DateRec.SetFilter("Period Start", '<=%1', pDate);
                         //DateRec.FindLast()();
                         //CustDateFilter[1] := Format(DateRec."Period Start") + '..' + Format(pDate);
 
@@ -213,13 +213,13 @@ codeunit 50602 "ACO_GeneralFunctions"
             // This Year
             DateRec.Reset();
             DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
-            DateRec.Setfilter("Period Start", '<=%1', pDate);
+            DateRec.SetFilter("Period Start", '<=%1', pDate);
             DateRec.FindLast();
             CustDateFilter[2] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
             // Last Year
             DateRec.Reset();
             DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
-            DateRec.Setfilter("Period Start", '<=%1', CALCDATE('-1Y', pDate));
+            DateRec.SetFilter("Period Start", '<=%1', CALCDATE('-1Y', pDate));
             DateRec.FindLast();
             CustDateFilter[3] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
             //<<3.0.1.2018
@@ -227,26 +227,26 @@ codeunit 50602 "ACO_GeneralFunctions"
             FOR i := 1 TO 3 DO BEGIN
                 CustLedgEntry2.RESET;
                 CustLedgEntry2.SETCURRENTKEY("Vendor No.", "Posting Date");
-                CustLedgEntry2.SETRANGE("Vendor No.", "No.");
+                CustLedgEntry2.SetRange("Vendor No.", "No.");
 
-                CustLedgEntry2.SETFILTER("Posting Date", CustDateFilter[i]);
-                CustLedgEntry2.SETRANGE("Posting Date", 0D, CustLedgEntry2.GETRANGEMAX("Posting Date"));
+                CustLedgEntry2.SetFilter("Posting Date", CustDateFilter[i]);
+                CustLedgEntry2.SetRange("Posting Date", 0D, CustLedgEntry2.GETRANGEMAX("Posting Date"));
                 DtldCustLedgEntry2.SETCURRENTKEY("Vendor No.", "Posting Date");
                 CustLedgEntry2.COPYFILTER("Vendor No.", DtldCustLedgEntry2."Vendor No.");
                 CustLedgEntry2.COPYFILTER("Posting Date", DtldCustLedgEntry2."Posting Date");
-                DtldCustLedgEntry2.CALCSUMS("Amount (LCY)");
+                DtldCustLedgEntry2.CalcSums("Amount (LCY)");
                 DaysToPay := 0;
                 NoOfInv := 0;
 
-                CustLedgEntry2.SETFILTER("Posting Date", CustDateFilter[i]);
-                IF CustLedgEntry2.FIND('+') THEN
+                CustLedgEntry2.SetFilter("Posting Date", CustDateFilter[i]);
+                IF CustLedgEntry2.Find('+') THEN
                     REPEAT
                     BEGIN
                         j := CustLedgEntry2."Document Type";
                         IF j > 0 THEN
                             NoOfDoc[i] [j] := NoOfDoc[i] [j] + 1;
 
-                        CustLedgEntry2.CALCFIELDS("Amount (LCY)");
+                        CustLedgEntry2.CalcFields("Amount (LCY)");
 
                         // Optimized Approximation
                         IF (CustLedgEntry2."Document Type" = CustLedgEntry2."Document Type"::Invoice) AND
@@ -259,7 +259,7 @@ codeunit 50602 "ACO_GeneralFunctions"
                                     UpdateDaysToPay(CustLedgEntry3."Posting Date" - CustLedgEntry2."Posting Date", DaysToPay, NoOfInv);
                             END ELSE BEGIN
                                 CustLedgEntry3.SETCURRENTKEY("Closed by Entry No.");
-                                CustLedgEntry3.SETRANGE("Closed by Entry No.", CustLedgEntry2."Entry No.");
+                                CustLedgEntry3.SetRange("Closed by Entry No.", CustLedgEntry2."Entry No.");
                                 IF CustLedgEntry3.FindLast() THEN
                                     UpdateDaysToPay(CustLedgEntry3."Posting Date" - CustLedgEntry2."Posting Date", DaysToPay, NoOfInv);
                             END;
@@ -457,14 +457,14 @@ codeunit 50602 "ACO_GeneralFunctions"
         GetGenrealLegerSetup();
 
         CustLedgerEntry.SetCurrentKey("Customer No.", "Open", "Positive", "Due Date", "Currency Code");
-        CustLedgerEntry.SETRANGE("Customer No.", pCustomerCode);
-        CustLedgerEntry.SETRANGE(Open, true);
+        CustLedgerEntry.SetRange("Customer No.", pCustomerCode);
+        CustLedgerEntry.SetRange(Open, true);
         if (pFilterDate <> 0D) then
-            CustLedgerEntry.SETFILTER("Posting Date", '<=%1', pFilterDate);
+            CustLedgerEntry.SetFilter("Posting Date", '<=%1', pFilterDate);
         if CustLedgerEntry.FindSet(false) then begin
             repeat
             begin
-                CustLedgerEntry.Calcfields("Remaining Amt. (LCY)");
+                CustLedgerEntry.CalcFields("Remaining Amt. (LCY)");
                 // Update Amount as per required currency
                 if (pFCYCurrencyCode = '') or (pFCYCurrencyCode = 'GBP') then
                     ReturnValue += CustLedgerEntry."Remaining Amt. (LCY)"
@@ -487,15 +487,15 @@ codeunit 50602 "ACO_GeneralFunctions"
     begin
         GetGenrealLegerSetup();
 
-        DetailedCustLedgEntry.SETRANGE("Customer No.", pCustomerCode);
-        //DetailedCustLedgEntry.SETFILTER(COPYFILTER("Global Dimension 1 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 1");
-        //DetailedCustLedgEntry.SETFILTER(COPYFILTER("Global Dimension 2 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 2");
+        DetailedCustLedgEntry.SetRange("Customer No.", pCustomerCode);
+        //DetailedCustLedgEntry.SetFilter(COPYFILTER("Global Dimension 1 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 1");
+        //DetailedCustLedgEntry.SetFilter(COPYFILTER("Global Dimension 2 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 2");
         if (pDate <> 0D) then
-            DetailedCustLedgEntry.SETFILTER("Posting Date", '<=%1', pDate);
+            DetailedCustLedgEntry.SetFilter("Posting Date", '<=%1', pDate);
         if (pCurrencyCode = '') or (pCurrencyCode = GenLedgerSetup."LCY Code") then
-            DetailedCustLedgEntry.SETFILTER("Currency Code", '%1|%2', '', pCurrencyCode)
+            DetailedCustLedgEntry.SetFilter("Currency Code", '%1|%2', '', pCurrencyCode)
         else
-            DetailedCustLedgEntry.SETRANGE("Currency Code", pCurrencyCode);
+            DetailedCustLedgEntry.SetRange("Currency Code", pCurrencyCode);
         DetailedCustLedgEntry.CalcSums(Amount);
 
         exit(DetailedCustLedgEntry.Amount);
@@ -547,20 +547,20 @@ codeunit 50602 "ACO_GeneralFunctions"
             // FOR j := 1 TO 6 DO
             // BEGIN
             //     CustLedgEntry[j].SETCURRENTKEY("Document Type", "Customer No.", "Posting Date");
-            //     CustLedgEntry[j].SETRANGE("Document Type", j); // Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund
-            //     CustLedgEntry[j].SETRANGE("Customer No.", "No.");
+            //     CustLedgEntry[j].SetRange("Document Type", j); // Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund
+            //     CustLedgEntry[j].SetRange("Customer No.", "No.");
             //     IF CustLedgEntry[j].FindLast() THEN
-            //         CustLedgEntry[j].CALCFIELDS(Amount, "Remaining Amount");
+            //         CustLedgEntry[j].CalcFields(Amount, "Remaining Amount");
             // END;
             // CustLedgEntry2.SETCURRENTKEY("Customer No.", Open);
-            // CustLedgEntry2.SETRANGE("Customer No.", "No.");
-            // CustLedgEntry2.SETRANGE(Open, TRUE);
-            // IF CustLedgEntry2.FIND('+') THEN begin
+            // CustLedgEntry2.SetRange("Customer No.", "No.");
+            // CustLedgEntry2.SetRange(Open, TRUE);
+            // IF CustLedgEntry2.Find('+') THEN begin
             //     REPEAT
             //     begin
             //         j := CustLedgEntry2."Document Type";
             //         IF j > 0 THEN BEGIN
-            //             CustLedgEntry2.CALCFIELDS("Remaining Amt. (LCY)");
+            //             CustLedgEntry2.CalcFields("Remaining Amt. (LCY)");
             //             TotalRemainAmountLCY[j] := TotalRemainAmountLCY[j] + CustLedgEntry2."Remaining Amt. (LCY)";
             //         END;
             //     end;
@@ -585,10 +585,10 @@ codeunit 50602 "ACO_GeneralFunctions"
                         DateRec.Reset();
                         DateRec.SetRange("Period Type", DateRec."Period Type"::Quarter);
                         //>>2.2.4.2018
-                        //DateRec.Setfilter("Period Start", '>=%1', pDate);
-                        //DateRec.Setfilter("Period End", '<=%1', pDate);
+                        //DateRec.SetFilter("Period Start", '>=%1', pDate);
+                        //DateRec.SetFilter("Period End", '<=%1', pDate);
                         //DateRec.FindFirst()();
-                        DateRec.Setfilter("Period Start", '<=%1', pDate);
+                        DateRec.SetFilter("Period Start", '<=%1', pDate);
                         DateRec.FindLast();
                         //<<2.2.4.2018
                         CustDateFilter[1] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
@@ -598,10 +598,10 @@ codeunit 50602 "ACO_GeneralFunctions"
                         DateRec.Reset();
                         DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
                         //>>2.2.4.2018
-                        //DateRec.Setfilter("Period Start", '>=%1', pDate);
-                        //DateRec.Setfilter("Period End", '<=%1', pDate);
+                        //DateRec.SetFilter("Period Start", '>=%1', pDate);
+                        //DateRec.SetFilter("Period End", '<=%1', pDate);
                         //DateRec.FindFirst()();
-                        DateRec.Setfilter("Period Start", '<=%1', pDate);
+                        DateRec.SetFilter("Period Start", '<=%1', pDate);
                         DateRec.FindLast();
                         //<<2.2.4.2018
                         CustDateFilter[1] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
@@ -613,10 +613,10 @@ codeunit 50602 "ACO_GeneralFunctions"
                         //DateRec.Reset();
                         //DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
                         ////>>2.2.4.2018
-                        ////DateRec.Setfilter("Period Start", '>=%1', pDate);
-                        ////DateRec.Setfilter("Period End", '<=%1', pDate);
+                        ////DateRec.SetFilter("Period Start", '>=%1', pDate);
+                        ////DateRec.SetFilter("Period End", '<=%1', pDate);
                         ////DateRec.FindFirst()();
-                        //DateRec.Setfilter("Period Start", '<=%1', pDate);
+                        //DateRec.SetFilter("Period Start", '<=%1', pDate);
                         //DateRec.FindLast()();
                         ////<<2.2.4.2018
                         //CustDateFilter[1] := Format(DateRec."Period Start") + '..' + Format(pDate);
@@ -631,13 +631,13 @@ codeunit 50602 "ACO_GeneralFunctions"
             // This Year
             DateRec.Reset();
             DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
-            DateRec.Setfilter("Period Start", '<=%1', pDate);
+            DateRec.SetFilter("Period Start", '<=%1', pDate);
             DateRec.FindLast();
             CustDateFilter[2] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
             // Last Year
             DateRec.Reset();
             DateRec.SetRange("Period Type", DateRec."Period Type"::Year);
-            DateRec.Setfilter("Period Start", '<=%1', CALCDATE('-1Y', pDate));
+            DateRec.SetFilter("Period Start", '<=%1', CALCDATE('-1Y', pDate));
             DateRec.FindLast();
             CustDateFilter[3] := Format(DateRec."Period Start") + '..' + Format(DateRec."Period End");
             //<<3.0.1.2018
@@ -645,28 +645,28 @@ codeunit 50602 "ACO_GeneralFunctions"
             FOR i := 1 TO 3 DO BEGIN
                 CustLedgEntry2.RESET;
                 CustLedgEntry2.SETCURRENTKEY("Customer No.", "Posting Date");
-                CustLedgEntry2.SETRANGE("Customer No.", "No.");
+                CustLedgEntry2.SetRange("Customer No.", "No.");
 
-                CustLedgEntry2.SETFILTER("Posting Date", CustDateFilter[i]);
-                CustLedgEntry2.SETRANGE("Posting Date", 0D, CustLedgEntry2.GETRANGEMAX("Posting Date"));
+                CustLedgEntry2.SetFilter("Posting Date", CustDateFilter[i]);
+                CustLedgEntry2.SetRange("Posting Date", 0D, CustLedgEntry2.GETRANGEMAX("Posting Date"));
                 DtldCustLedgEntry2.SETCURRENTKEY("Customer No.", "Posting Date");
                 CustLedgEntry2.COPYFILTER("Customer No.", DtldCustLedgEntry2."Customer No.");
                 CustLedgEntry2.COPYFILTER("Posting Date", DtldCustLedgEntry2."Posting Date");
-                DtldCustLedgEntry2.CALCSUMS("Amount (LCY)");
+                DtldCustLedgEntry2.CalcSums("Amount (LCY)");
                 //CustBalanceLCY := DtldCustLedgEntry2."Amount (LCY)";
                 //HighestBalanceLCY[i] := CustBalanceLCY;
                 DaysToPay := 0;
                 NoOfInv := 0;
 
-                CustLedgEntry2.SETFILTER("Posting Date", CustDateFilter[i]);
-                IF CustLedgEntry2.FIND('+') THEN
+                CustLedgEntry2.SetFilter("Posting Date", CustDateFilter[i]);
+                IF CustLedgEntry2.Find('+') THEN
                     REPEAT
                     BEGIN
                         j := CustLedgEntry2."Document Type";
                         IF j > 0 THEN
                             NoOfDoc[i] [j] := NoOfDoc[i] [j] + 1;
 
-                        CustLedgEntry2.CALCFIELDS("Amount (LCY)");
+                        CustLedgEntry2.CalcFields("Amount (LCY)");
                         //CustBalanceLCY := CustBalanceLCY - CustLedgEntry2."Amount (LCY)";
                         //IF CustBalanceLCY > HighestBalanceLCY[i] THEN
                         //    HighestBalanceLCY[i] := CustBalanceLCY;
@@ -682,7 +682,7 @@ codeunit 50602 "ACO_GeneralFunctions"
                                     UpdateDaysToPay(CustLedgEntry3."Posting Date" - CustLedgEntry2."Posting Date", DaysToPay, NoOfInv);
                             END ELSE BEGIN
                                 CustLedgEntry3.SETCURRENTKEY("Closed by Entry No.");
-                                CustLedgEntry3.SETRANGE("Closed by Entry No.", CustLedgEntry2."Entry No.");
+                                CustLedgEntry3.SetRange("Closed by Entry No.", CustLedgEntry2."Entry No.");
                                 IF CustLedgEntry3.FindLast() THEN
                                     UpdateDaysToPay(CustLedgEntry3."Posting Date" - CustLedgEntry2."Posting Date", DaysToPay, NoOfInv);
                             END;

@@ -10,15 +10,15 @@ pageextension 50320 "ACO_PurchCrMemo" extends "Purchase Credit Memo"
         {
             field(ACO_DisputeCode; Rec.ACO_DisputeCode)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 trigger OnValidate();
                 begin
-                    CalcFields(ACO_DisputeName);
+                    Rec.CalcFields(ACO_DisputeName);
                 end;
             }
             field(ACO_DisputeName; Rec.ACO_DisputeName)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Editable = false;
             }
         }

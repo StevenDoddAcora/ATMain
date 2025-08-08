@@ -11,7 +11,7 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
         addlast(Control1)
         {
             //>> Add new controls based on new Shortcut dimension array
-            field(ExtendedShortcutDimCode3; Rec.ExtendedShortcutDimCode[3])
+            field(ExtendedShortcutDimCode3; ExtendedShortcutDimCode[3])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,3';
@@ -20,12 +20,12 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                 trigger OnValidate()
                 begin
                     //>> It replicates the stardard validation
-                    ValidateShortcutDimCode(3, ExtendedShortcutDimCode[3]);
+                    Rec.ValidateShortcutDimCode(3, ExtendedShortcutDimCode[3]);
                     //>> It applies the Journal Dimension Combination
                     ApplyJnlDimCombination(3, ExtendedShortcutDimCode[3])
                 end;
             }
-            field(ExtendedShortcutDimCode4; Rec.ExtendedShortcutDimCode[4])
+            field(ExtendedShortcutDimCode4; ExtendedShortcutDimCode[4])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,4';
@@ -34,12 +34,12 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                 trigger OnValidate()
                 begin
                     //>> It replicates the stardard validation
-                    ValidateShortcutDimCode(4, ExtendedShortcutDimCode[4]);
+                    Rec.ValidateShortcutDimCode(4, ExtendedShortcutDimCode[4]);
                     //>> It applies the Journal Dimension Combination
                     ApplyJnlDimCombination(4, ExtendedShortcutDimCode[4])
                 end;
             }
-            field(ExtendedShortcutDimCode5; Rec.ExtendedShortcutDimCode[5])
+            field(ExtendedShortcutDimCode5; ExtendedShortcutDimCode[5])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,5';
@@ -48,12 +48,12 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                 trigger OnValidate()
                 begin
                     //>> It replicates the stardard validation
-                    ValidateShortcutDimCode(5, ExtendedShortcutDimCode[5]);
+                    Rec.ValidateShortcutDimCode(5, ExtendedShortcutDimCode[5]);
                     //>> It applies the Journal Dimension Combination
                     ApplyJnlDimCombination(5, ExtendedShortcutDimCode[5])
                 end;
             }
-            field(ExtendedShortcutDimCode6; Rec.ExtendedShortcutDimCode[6])
+            field(ExtendedShortcutDimCode6; ExtendedShortcutDimCode[6])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,6';
@@ -62,12 +62,12 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                 trigger OnValidate()
                 begin
                     //>> It replicates the stardard validation
-                    ValidateShortcutDimCode(6, ExtendedShortcutDimCode[6]);
+                    Rec.ValidateShortcutDimCode(6, ExtendedShortcutDimCode[6]);
                     //>> It applies the Journal Dimension Combination
                     ApplyJnlDimCombination(6, ExtendedShortcutDimCode[6])
                 end;
             }
-            field(ExtendedShortcutDimCode7; Rec.ExtendedShortcutDimCode[7])
+            field(ExtendedShortcutDimCode7; ExtendedShortcutDimCode[7])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,7';
@@ -76,12 +76,12 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                 trigger OnValidate()
                 begin
                     //>> It replicates the stardard validation
-                    ValidateShortcutDimCode(7, ExtendedShortcutDimCode[7]);
+                    Rec.ValidateShortcutDimCode(7, ExtendedShortcutDimCode[7]);
                     //>> It applies the Journal Dimension Combination
                     ApplyJnlDimCombination(7, ExtendedShortcutDimCode[7])
                 end;
             }
-            field(ExtendedShortcutDimCode8; Rec.ExtendedShortcutDimCode[8])
+            field(ExtendedShortcutDimCode8; ExtendedShortcutDimCode[8])
             {
                 ApplicationArea = All;
                 CaptionClass = '1,2,8';
@@ -90,7 +90,7 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                 trigger OnValidate()
                 begin
                     //>> It replicates the stardard validation
-                    ValidateShortcutDimCode(8, ExtendedShortcutDimCode[8]);
+                    Rec.ValidateShortcutDimCode(8, ExtendedShortcutDimCode[8]);
                     //>> It applies the Journal Dimension Combination
                     ApplyJnlDimCombination(8, ExtendedShortcutDimCode[8])
                 end;
@@ -108,7 +108,7 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
             Visible = ExtendedShortcutDimVisible1;
             trigger OnAfterValidate()
             begin
-                ApplyJnlDimCombination(1, "Shortcut Dimension 1 Code");
+                ApplyJnlDimCombination(1, Rec."Shortcut Dimension 1 Code");
             end;
         }
 
@@ -117,41 +117,41 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
             Visible = ExtendedShortcutDimVisible2;
             trigger OnAfterValidate()
             begin
-                ApplyJnlDimCombination(2, "Shortcut Dimension 2 Code");
+                ApplyJnlDimCombination(2, Rec."Shortcut Dimension 2 Code");
             end;
         }
-        Rec.modify("ShortcutDimCode[3]")
+        modify(ShortcutDimCode3)
         {
             //>> hidden and disabled
             Visible = false;
             Enabled = false;
 
         }
-        Rec.modify("ShortcutDimCode[4]")
+        modify(ShortcutDimCode4)
         {
             //>> hidden and disabled
             Visible = false;
             Enabled = false;
         }
-        Rec.modify("ShortcutDimCode[5]")
+        modify(ShortcutDimCode5)
         {
             //>> hidden and disabled
             Visible = false;
             Enabled = false;
         }
-        Rec.modify("ShortcutDimCode[6]")
+        modify(ShortcutDimCode6)
         {
             //>> hidden and disabled
             Visible = false;
             Enabled = false;
         }
-        Rec.modify("ShortcutDimCode[7]")
+        modify(ShortcutDimCode7)
         {
             //>> hidden and disabled
             Visible = false;
             Enabled = false;
         }
-        Rec.modify("ShortcutDimCode[8]")
+        modify(ShortcutDimCode8)
         {
             //>> hidden and disabled
             Visible = false;
@@ -225,18 +225,18 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
                     case nDimension of
                         1:  //>> Shorcut Dimension 1
                             begin
-                                "Shortcut Dimension 1 Code" := DimCombLine.ACO_DimensionValue;
+                                Rec."Shortcut Dimension 1 Code" := DimCombLine.ACO_DimensionValue;
                                 Rec.Validate("Shortcut Dimension 1 Code");
                             end;
                         2:  //>> Shortcut Dimension 2
                             begin
-                                "Shortcut Dimension 2 Code" := DimCombLine.ACO_DimensionValue;
+                                Rec."Shortcut Dimension 2 Code" := DimCombLine.ACO_DimensionValue;
                                 Rec.Validate("Shortcut Dimension 2 Code");
                             end;
                         else    //>> All the remaining shortcut (non global dimensions)
                         begin
                             ExtendedShortcutDimCode[nDimension] := DimCombLine.ACO_DimensionValue;
-                            ValidateShortcutDimCode(nDimension, ExtendedShortcutDimCode[nDimension]);
+                            Rec.ValidateShortcutDimCode(nDimension, ExtendedShortcutDimCode[nDimension]);
                         end;
                     end;    //>> End Case
                 end;
@@ -267,7 +267,7 @@ pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Ex
     trigger OnAfterGetRecord()
     begin
         //>> It replicates standard code on the new Shortcut Dimension array
-        ShowShortcutDimCode(ExtendedShortcutDimCode);
+        Rec.ShowShortcutDimCode(ExtendedShortcutDimCode);
     end;
 
     //#endregion "Page Triggers"

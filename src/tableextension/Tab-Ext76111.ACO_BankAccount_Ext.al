@@ -21,7 +21,7 @@ tableextension 50111 "ACO_BankAccount_Ext" extends "Bank Account"
                 GenLedSetup.get();
 
                 if ACO_Default then begin
-                    BankAccount.SETFILTER("No.", '<>%1', "No.");
+                    BankAccount.SetFilter("No.", '<>%1', "No.");
                     BankAccount.SetRange("Currency Code", "Currency Code");
                     //>>2.2.6.2018
                     BankAccount.SetRange(ACO_Default, true);

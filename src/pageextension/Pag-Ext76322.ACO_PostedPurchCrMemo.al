@@ -10,12 +10,12 @@ pageextension 50322 "ACO_PostedPurchCrMemo" extends "Posted Purchase Credit Memo
         {
             field(ACO_DisputeCode; Rec.ACO_DisputeCode)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Editable = false;
             }
             field(ACO_DisputeName; Rec.ACO_DisputeName)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Editable = false;
             }
         }

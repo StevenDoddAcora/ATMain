@@ -229,8 +229,8 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
                     VendorLedgEntry: Record "Vendor Ledger Entry";
                 begin
                     VendorLedgEntry.SETCURRENTKEY("Closed by Entry No.");
-                    VendorLedgEntry.SETRANGE("Closed by Entry No.", "Entry No.");
-                    VendorLedgEntry.SETRANGE("Posting Date", 0D, EndingDate);
+                    VendorLedgEntry.SetRange("Closed by Entry No.", "Entry No.");
+                    VendorLedgEntry.SetRange("Posting Date", 0D, EndingDate);
                     CopyDimFiltersFromVendor(VendorLedgEntry);
                     if VendorLedgEntry.FindSet() then
                         repeat
@@ -238,7 +238,7 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
                         until VendorLedgEntry.NEXT = 0;
 
                     if "Closed by Entry No." <> 0 then begin
-                        VendorLedgEntry.SETRANGE("Closed by Entry No.", "Closed by Entry No.");
+                        VendorLedgEntry.SetRange("Closed by Entry No.", "Closed by Entry No.");
                         if VendorLedgEntry.FindSet() then
                             repeat
                                 InsertTemp(VendorLedgEntry);
@@ -246,8 +246,8 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
                     end;
 
                     VendorLedgEntry.RESET;
-                    VendorLedgEntry.SETRANGE("Entry No.", "Closed by Entry No.");
-                    VendorLedgEntry.SETRANGE("Posting Date", 0D, EndingDate);
+                    VendorLedgEntry.SetRange("Entry No.", "Closed by Entry No.");
+                    VendorLedgEntry.SetRange("Posting Date", 0D, EndingDate);
                     CopyDimFiltersFromVendor(VendorLedgEntry);
                     if VendorLedgEntry.FindSet() then
                         repeat
@@ -260,9 +260,9 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
                 begin
                     //>>
                     // This filter was in DataItem however the vendor is based on the temp therfore it needs to be here
-                    SETRANGE("Vendor No.", Vendor."No.");
+                    SetRange("Vendor No.", Vendor."No.");
                     //<<
-                    SETRANGE("Posting Date", EndingDate + 1, DMY2DATE(31, 12, 9999));
+                    SetRange("Posting Date", EndingDate + 1, DMY2DATE(31, 12, 9999));
                     CopyDimFiltersFromVendor("Vendor Ledger Entry");
                 end;
             }
@@ -274,7 +274,7 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
                 trigger OnAfterGetRecord(); //OpenVendorLedgEntry
                 begin
                     if AgingBy = AgingBy::"Posting Date" then begin
-                        CALCFIELDS("Remaining Amt. (LCY)");
+                        CalcFields("Remaining Amt. (LCY)");
                         if "Remaining Amt. (LCY)" = 0 then
                             CurrReport.SKIP;
                     end;
@@ -286,12 +286,12 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
                 begin
                     //>>
                     // This filter was in DataItem however the vendor is based on the temp therfore it needs to be here
-                    SETRANGE("Vendor No.", Vendor."No.");
+                    SetRange("Vendor No.", Vendor."No.");
                     //<<
 
                     if AgingBy = AgingBy::"Posting Date" then begin
-                        SETRANGE("Posting Date", 0D, EndingDate);
-                        SETRANGE("Date Filter", 0D, EndingDate);
+                        SetRange("Posting Date", 0D, EndingDate);
+                        SetRange("Date Filter", 0D, EndingDate);
                     end;
                     CopyDimFiltersFromVendor(OpenVendorLedgEntry);
                 end;
@@ -423,7 +423,7 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
                                 CurrReport.BREAK;
 
                         VendorLedgEntryEndingDate := TempVendorLedgEntry;
-                        DetailedVendorLedgerEntry.SETRANGE("Vendor Ledger Entry No.", VendorLedgEntryEndingDate."Entry No.");
+                        DetailedVendorLedgerEntry.SetRange("Vendor Ledger Entry No.", VendorLedgEntryEndingDate."Entry No.");
                         if DetailedVendorLedgerEntry.FindSet() then
                             repeat
                                 if (DetailedVendorLedgerEntry."Entry Type" =
@@ -509,9 +509,9 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
                         if VendorLedgEntryEndingDate."Amount to Apply" = 0 then begin
                             // Apply to one document only
                             // Find related line on journal to find amount
-                            lGenJnlLine.setrange("Journal Template Name", "Gen. Journal Line"."Journal Template Name");
-                            lGenJnlLine.setrange("Journal Batch Name", "Gen. Journal Line"."Journal Batch Name");
-                            lGenJnlLine.setrange("Applies-to Doc. No.", VendorLedgEntryEndingDate."Document No.");
+                            lGenJnlLine.SetRange("Journal Template Name", "Gen. Journal Line"."Journal Template Name");
+                            lGenJnlLine.SetRange("Journal Batch Name", "Gen. Journal Line"."Journal Batch Name");
+                            lGenJnlLine.SetRange("Applies-to Doc. No.", VendorLedgEntryEndingDate."Document No.");
                             if lGenJnlLine.FindFirst() then begin
                                 //>>3.0.7.2018
                                 //percValue := lGenJnlLine.Amount / VendorLedgEntryEndingDate."Remaining Amount";
@@ -550,7 +550,7 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
                     trigger OnPreDataItem(); //TempVendortLedgEntryLoop
                     begin
                         if not PrintAmountInLCY then
-                            TempVendorLedgEntry.SETRANGE("Currency Code", TempCurrency.Code);
+                            TempVendorLedgEntry.SetRange("Currency Code", TempCurrency.Code);
                     end;
                 }
 
@@ -724,7 +724,7 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
                         CurrReport.BREAK;
 
                 CLEAR(AgedVendorLedgEntry);
-                TempCurrencyAmount.SETRANGE("Currency Code", TempCurrency2.Code);
+                TempCurrencyAmount.SetRange("Currency Code", TempCurrency2.Code);
                 if TempCurrencyAmount.FindSet() then
                     repeat
                         if TempCurrencyAmount.Date <> DMY2DATE(31, 12, 9999) then
@@ -1291,9 +1291,9 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
     local procedure CopyDimFiltersFromVendor(var VendorLedgerEntry: Record "Vendor Ledger Entry");
     begin
         if Vendor.GETFILTER("Global Dimension 1 Filter") <> '' then
-            VendorLedgerEntry.SETFILTER("Global Dimension 1 Code", Vendor.GETFILTER("Global Dimension 1 Filter"));
+            VendorLedgerEntry.SetFilter("Global Dimension 1 Code", Vendor.GETFILTER("Global Dimension 1 Filter"));
         if Vendor.GETFILTER("Global Dimension 2 Filter") <> '' then
-            VendorLedgerEntry.SETFILTER("Global Dimension 2 Code", Vendor.GETFILTER("Global Dimension 2 Filter"));
+            VendorLedgerEntry.SetFilter("Global Dimension 2 Code", Vendor.GETFILTER("Global Dimension 2 Filter"));
     end;
 
     local procedure UpdateVendorLedgerEntryTMP(pGJL: Record "Gen. Journal Line");
@@ -1304,9 +1304,9 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
         // Pick only entries selected in the journal
         if pGJL."Applies-to Doc. No." <> '' then begin
             lVendorLedgerEntry.SETCURRENTKEY("Document No.");
-            lVendorLedgerEntry.SETRANGE("Vendor No.", pGJL."Account No.");
-            lVendorLedgerEntry.SETRANGE("Document Type", pGJL."Applies-to Doc. Type");
-            lVendorLedgerEntry.SETRANGE("Document No.", pGJL."Applies-to Doc. No.");
+            lVendorLedgerEntry.SetRange("Vendor No.", pGJL."Account No.");
+            lVendorLedgerEntry.SetRange("Document Type", pGJL."Applies-to Doc. Type");
+            lVendorLedgerEntry.SetRange("Document No.", pGJL."Applies-to Doc. No.");
             lVendorLedgerEntry.FindFirst();
             if not VendorLedgerEntryTMP.GET(lVendorLedgerEntry."Entry No.") then begin
                 VendorLedgerEntryTMP.INIT();
@@ -1316,8 +1316,8 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
         end else begin
             if pGJL."Applies-to ID" <> '' then begin
                 lVendorLedgerEntry.SETCURRENTKEY("Vendor No.", "Applies-to ID", Open, Positive, "Due Date");
-                lVendorLedgerEntry.SETRANGE("Vendor No.", pGJL."Account No.");
-                lVendorLedgerEntry.SETRANGE("Applies-to ID", pGJL."Applies-to ID");
+                lVendorLedgerEntry.SetRange("Vendor No.", pGJL."Account No.");
+                lVendorLedgerEntry.SetRange("Applies-to ID", pGJL."Applies-to ID");
                 if lVendorLedgerEntry.FindSet() then begin
                     repeat
                         if not VendorLedgerEntryTMP.GET(lVendorLedgerEntry."Entry No.") then begin
@@ -1339,8 +1339,8 @@ report 50401 "ACO_SuggVendPaymentAnalysis"
     begin
         //>>
         lVendorLedgerEntry.SETCURRENTKEY("Document Type", "Vendor No.", "Posting Date", "Currency Code");
-        lVendorLedgerEntry.SETRANGE("Vendor No.", pVendorNo);
-        lVendorLedgerEntry.SETRANGE("Document Type", lVendorLedgerEntry."Document Type"::Payment);
+        lVendorLedgerEntry.SetRange("Vendor No.", pVendorNo);
+        lVendorLedgerEntry.SetRange("Document Type", lVendorLedgerEntry."Document Type"::Payment);
         if lVendorLedgerEntry.FindLast() then
             exit(FORMAT(lVendorLedgerEntry."Posting Date"));
 

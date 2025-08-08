@@ -1,3 +1,2 @@
-One of the page extensions has the error : "The name 'ACO_Exposure' does not exist in the current context.ALAL0118". Infact many have similar errors. The fix is to add Rec. for the references. Can you change all these (possibly on mass in a script) for the erroring page extensions
-There's an error : "The name 'FieldNo' does not exist in the current context.ALAL0118". I also put some more rec. in. Can you look at this and fix any remaining errors
-Line 42 in the vendor card has this error : "The name 'FieldNo' does not exist in the current context.ALAL0118" I suspect there are many more. Please fix all of these errors
+There are obsolete things that still need replacing. Such as "Payment Buffer" and "Session List"
+Codeunit 'TextManagement' is missing ALAL0185

@@ -85,12 +85,12 @@ pageextension 50301 "ACO_CustomerCard" extends "Customer Card"
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: SUM of Remaining Amount of the open Customer Ledger Entries where Currency field is Customer Report Currency 1';
                 Editable = false;
                 BlankZero = false;
-                CaptionClass = Rec.GetFieldCaptionClass(FieldNo(Rec.ACO_BalanceCurrency1));
+                CaptionClass = Rec.GetFieldCaptionClass(Rec.FieldNo(ACO_BalanceCurrency1));
 
                 trigger OnDrillDown();
                 begin
                     GetGenrealLegerSetup();
-                    OpenCurrCustomerLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency1, Today);
+                    Rec.OpenCurrCustomerLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency1, Today);
                 end;
             }
             field(ACO_BalanceCurrency2; Rec.ACO_BalanceCurrency2)
@@ -99,12 +99,12 @@ pageextension 50301 "ACO_CustomerCard" extends "Customer Card"
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: SUM of Remaining Amount of the open Customer Ledger Entries where Currency field is Customer Report Currency 2';
                 Editable = false;
                 BlankZero = false;
-                CaptionClass = Rec.GetFieldCaptionClass(FieldNo(Rec.ACO_BalanceCurrency2));
+                CaptionClass = Rec.GetFieldCaptionClass(Rec.FieldNo(ACO_BalanceCurrency2));
 
                 trigger OnDrillDown();
                 begin
                     GetAdditionalSetup();
-                    OpenCurrCustomerLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency2, Today);
+                    Rec.OpenCurrCustomerLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency2, Today);
                 end;
             }
             field(ACO_BalanceCurrency3; Rec.ACO_BalanceCurrency3)
@@ -113,12 +113,12 @@ pageextension 50301 "ACO_CustomerCard" extends "Customer Card"
                 ToolTip = 'Field value is updated by the update routine. The calculation formula is as follow: SUM of Remaining Amount of the open Customer Ledger Entries where Currency field is Customer Report Currency 3';
                 Editable = false;
                 BlankZero = false;
-                CaptionClass = Rec.GetFieldCaptionClass(FieldNo(Rec.ACO_BalanceCurrency3));
+                CaptionClass = Rec.GetFieldCaptionClass(Rec.FieldNo(ACO_BalanceCurrency3));
 
                 trigger OnDrillDown();
                 begin
                     GetAdditionalSetup();
-                    OpenCurrCustomerLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency3, Today);
+                    Rec.OpenCurrCustomerLedgerEntries(AdditionalSetup.ACO_CustomerReportCurrency3, Today);
                 end;
             }
             field(ACO_LastCurrencyDataUpdateDate; Rec.ACO_LastCurrencyDataUpdateDate)
@@ -157,7 +157,8 @@ pageextension 50301 "ACO_CustomerCard" extends "Customer Card"
             //>>2.0.0.2018
             part(ACO_CustomerEntryStatFactBox; ACO_CustomerEntryStatFactBox)
             {
-                SubPageLink = "No." = field("No."); ApplicationArea = all;
+                SubPageLink = "No." = field("No.");
+                ApplicationArea = all;
             }
             //<<2.0.0.2018
         }
@@ -184,7 +185,7 @@ pageextension 50301 "ACO_CustomerCard" extends "Customer Card"
                     CustomerRec: record customer;
                     RecalcCustCurrencyData: Report ACO_RecalcCustCurrencyData;
                 begin
-                    CustomerRec.SETRANGE("No.", "No.");
+                    CustomerRec.SetRange("No.", Rec."No.");
 
                     RecalcCustCurrencyData.SetTableView(CustomerRec);
                     RecalcCustCurrencyData.RunModal();
@@ -202,7 +203,7 @@ pageextension 50301 "ACO_CustomerCard" extends "Customer Card"
         GetAdditionalSetup();
         GeneralFunctions.CalculateCustomerAvgDaysToPay(Rec, AvgDaysToPay, AdditionalSetup.ACO_AvgCollectionPeriodCalc, WorkDate);
         // 1 is related to the period
-        ACO_AvgCollectionPeriod := AvgDaysToPay[1];
+        Rec.ACO_AvgCollectionPeriod := AvgDaysToPay[1];
         //<<2.0.0.2018
     end;
 

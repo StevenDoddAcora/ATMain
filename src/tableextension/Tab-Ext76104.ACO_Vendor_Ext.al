@@ -154,15 +154,15 @@ tableextension 50104 "ACO_Vendor_Ext" extends Vendor
     begin
         GetGenrealLegerSetup();
 
-        DetailedVendLedgEntry.SETRANGE("Vendor No.", "No.");
-        //DetailedCustLedgEntry.SETFILTER(COPYFILTER("Global Dimension 1 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 1");
-        //DetailedCustLedgEntry.SETFILTER(COPYFILTER("Global Dimension 2 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 2");
+        DetailedVendLedgEntry.SetRange("Vendor No.", "No.");
+        //DetailedCustLedgEntry.SetFilter(COPYFILTER("Global Dimension 1 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 1");
+        //DetailedCustLedgEntry.SetFilter(COPYFILTER("Global Dimension 2 Filter",DetailedCustLedgEntry."Initial Entry Global Dim. 2");
         if (pDate <> 0D) then
-            DetailedVendLedgEntry.SETFILTER("Posting Date", '<=%1', pDate);
+            DetailedVendLedgEntry.SetFilter("Posting Date", '<=%1', pDate);
         if (pCurrencyCode = '') or (pCurrencyCode = GenLedgerSetup."LCY Code") then
-            DetailedVendLedgEntry.SETFILTER("Currency Code", '%1|%2', '', pCurrencyCode)
+            DetailedVendLedgEntry.SetFilter("Currency Code", '%1|%2', '', pCurrencyCode)
         else
-            DetailedVendLedgEntry.SETRANGE("Currency Code", pCurrencyCode);
+            DetailedVendLedgEntry.SetRange("Currency Code", pCurrencyCode);
         VendLedgerEntry.DrillDownOnEntries(DetailedVendLedgEntry);
     end;
 

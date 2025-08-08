@@ -39,7 +39,7 @@ pageextension 50309 "ACO_CustomerLedgerEntries" extends "Customer Ledger Entries
         }
 
         ///<summary>It modifies "On Hold"</summary>
-        Rec.modify("On Hold")
+        modify("On Hold")
         {
             ///<summary>The field is now disabled since it can only be changed via changing "Dispute Code"</summary>
             Enabled = false;

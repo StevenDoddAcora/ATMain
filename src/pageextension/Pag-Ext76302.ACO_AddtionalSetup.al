@@ -44,7 +44,7 @@ pageextension 50302 "ACO_AddtionalSetup" extends ACO_AdditionalSetup
                 }
                 //<<2.2.0.2018
                 //>>2.2.5.2018
-                field(ACO_PaymentRefSeriesNo; "ACO_PaymentRefSeriesNo")
+                field(ACO_PaymentRefSeriesNo; Rec."ACO_PaymentRefSeriesNo")
                 {
                     Caption = 'Payment Reference Series No.';
                     ApplicationArea = All;

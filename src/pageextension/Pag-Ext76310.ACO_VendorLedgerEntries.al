@@ -40,7 +40,7 @@ pageextension 50310 "ACO_VendorLedgerEntries" extends "Vendor Ledger Entries" //
             //<<2.3.0.2018
         }
         ///<summary>It modifies "On Hold"</summary>
-        Rec.modify("On Hold")
+        modify("On Hold")
         {
             ///<summary>The field is now disabled since it can only be changed via changing "Dispute Code"</summary>
             Enabled = false;
@@ -61,7 +61,7 @@ pageextension 50310 "ACO_VendorLedgerEntries" extends "Vendor Ledger Entries" //
                 var
                     VendDisputeEntry: Record ACO_VendorDisputeEntry;
                 begin
-                    VendDisputeEntry.Rec.SetRange(ACO_VendorLedgerEntryNo, rec."Entry No.");
+                    VendDisputeEntry.SetRange(ACO_VendorLedgerEntryNo, Rec."Entry No.");
                     Page.Run(0, VendDisputeEntry);
                 end;
             }
