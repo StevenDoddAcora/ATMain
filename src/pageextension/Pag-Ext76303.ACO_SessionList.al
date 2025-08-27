@@ -1,7 +1,8 @@
-pageextension 50303 "ACO_SessionList" extends "Active Sessions"
+pageextension 50303 "ACO_SessionList" extends "Concurrent Session List"
 {
     //#region Documentation
     // 1.1.0.2018 LBR 11/06/2019 - This is temp change to allow to kill user session
+    // UPDATED: Changed from "Active Sessions" to "Concurrent Session List" - correct modern BC page name
     //#endregion Documentation
 
     actions
@@ -19,9 +20,11 @@ pageextension 50303 "ACO_SessionList" extends "Active Sessions"
                 trigger OnAction();
                 var
                     killLbl: label 'Do you want to kill session: %1';
+                    ActiveSession: Record "Active Session";
                 begin
-                    if Confirm(StrSubstNo(killLbl, "Session ID"), false) then
-                        StopSession("Session ID");
+                    if ActiveSession.Get(Rec."Session ID") then
+                        if Confirm(StrSubstNo(killLbl, Rec."Session ID"), false) then
+                            StopSession(Rec."Session ID");
                 end;
             }
         }

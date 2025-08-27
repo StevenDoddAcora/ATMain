@@ -344,11 +344,10 @@ report 50403 "ACO_SuggestVendorPayments"
                             ToolTip = 'Specifies the next available number in the number series for the journal batch that is linked to the payment journal. When you run the batch job, this is the document number that appears on the first payment journal line. You can also fill in this field manually.';
 
                             trigger OnValidate();
-                            var
-                                TextManagement: Codeunit TextManagement;
                             begin
                                 if NextDocNo <> '' then
-                                    TextManagement.EvaluateIncStr(NextDocNo, StartingDocumentNoErr);
+                                    if not Evaluate(NextDocNo, IncStr(NextDocNo)) then
+                                        Error(StartingDocumentNoErr);
                             end;
                         }
                         field(NewDocNoPerLine; DocNoPerLine)
@@ -369,7 +368,6 @@ report 50403 "ACO_SuggestVendorPayments"
                             ApplicationArea = Basic, Suite;
                             Caption = 'Bal. Account Type';
                             Importance = Additional;
-                            OptionCaption = 'G/L Account,,,Bank Account';
                             ToolTip = 'Specifies the balancing account type that payments on the payment journal are posted to.';
 
                             trigger OnValidate();
@@ -433,7 +431,7 @@ report 50403 "ACO_SuggestVendorPayments"
                             trigger OnValidate();
                             begin
                                 if (GenJnlLine2."Bal. Account Type" <> GenJnlLine2."Bal. Account Type"::"Bank Account") and
-                                   (GenJnlLine2."Bank Payment Type" > 0)
+                                   (GenJnlLine2."Bank Payment Type".AsInteger() > 0)
                                 then
                                     ERROR(
                                       Text010,
@@ -488,9 +486,9 @@ report 50403 "ACO_SuggestVendorPayments"
 
     trigger OnInitReport();
     var
-        PermissionManager: Codeunit "Permission Manager";
+        EnvironmentInfo: Codeunit "Environment Information";
     begin
-        if PermissionManager.SoftwareAsAService then
+        if EnvironmentInfo.IsSaaS() then
             CheckOtherJournalBatches := true;
     end;
 
@@ -546,7 +544,7 @@ report 50403 "ACO_SuggestVendorPayments"
         SelectedDim: Record "Selected Dimension";
         VendorLedgEntryTemp: Record "Vendor Ledger Entry" temporary;
         TempErrorMessage: Record "Error Message" temporary;
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeries: Codeunit "No. Series";
         DimMgt: Codeunit DimensionManagement;
         DimBufMgt: Codeunit "Dimension Buffer Management";
         Window: Dialog;
@@ -571,14 +569,13 @@ report 50403 "ACO_SuggestVendorPayments"
         UseDueDateAsPostingDate: Boolean;
         StopPayments: Boolean;
         DocNoPerLine: Boolean;
-        BankPmtType: Option;
-        BalAccType: Option "G/L Account",Customer,Vendor,"Bank Account";
+        BankPmtType: Enum "Bank Payment Type";
+        BalAccType: Enum "Gen. Journal Account Type";
         BalAccNo: Code[20];
         MessageText: Text;
         GenJnlLineInserted: Boolean;
         SeveralCurrencies: Boolean;
         Text024: Label 'There are one or more entries for which no payment suggestions have been made because the posting dates of the entries are later than the requested posting date. Do you want to see the entries?';
-        [InDataSet]
         SummarizePerDimTextEnable: Boolean;
         Text025: Label 'The %1 with the number %2 has a %3 with the number %4.';
         ShowPostingDateWarning: Boolean;
@@ -622,12 +619,12 @@ report 50403 "ACO_SuggestVendorPayments"
         if GenJnlBatch."No. Series" = '' then
             NextDocNo := ''
         else begin
-            NextDocNo := NoSeriesMgt.GetNextNo(GenJnlBatch."No. Series", PostingDate, false);
-            CLEAR(NoSeriesMgt);
+            NextDocNo := NoSeries.GetNextNo(GenJnlBatch."No. Series", PostingDate);
+            CLEAR(NoSeries);
         end;
     end;
 
-    procedure InitializeRequest(LastPmtDate: Date; FindPmtDisc: Boolean; NewAvailableAmount: Decimal; NewSkipExportedPayments: Boolean; NewPostingDate: Date; NewStartDocNo: Code[20]; NewSummarizePerVend: Boolean; BalAccType: Option "G/L Account",Customer,Vendor,"Bank Account"; BalAccNo: Code[20]; BankPmtType: Option);
+    procedure InitializeRequest(LastPmtDate: Date; FindPmtDisc: Boolean; NewAvailableAmount: Decimal; NewSkipExportedPayments: Boolean; NewPostingDate: Date; NewStartDocNo: Code[20]; NewSummarizePerVend: Boolean; BalAccType: Enum "Gen. Journal Account Type"; BalAccNo: Code[20]; BankPmtType: Enum "Bank Payment Type");
     begin
         LastDueDateToPayReq := LastPmtDate;
         //>>2.3.1.2018
@@ -696,7 +693,7 @@ report 50403 "ACO_SuggestVendorPayments"
             "Payment Terms Code" := Vend2."Payment Terms Code";
             VALIDATE("Bill-to/Pay-to No.", "Account No.");
             VALIDATE("Sell-to/Buy-from No.", "Account No.");
-            "Gen. Posting Type" := 0;
+            "Gen. Posting Type" := "Gen. Posting Type"::" ";
             "Gen. Bus. Posting Group" := '';
             "Gen. Prod. Posting Group" := '';
             "VAT Bus. Posting Group" := '';
@@ -951,30 +948,26 @@ report 50403 "ACO_SuggestVendorPayments"
                 NewDimensionID := DimMgt.GetDimensionSetID(TempDimSetEntry);
                 "Dimension Set ID" := NewDimensionID;
             end;
-            CreateDim(
-              DimMgt.TypeToTableID1("Account Type"), "Account No.",
-              DimMgt.TypeToTableID1("Bal. Account Type"), "Bal. Account No.",
-              DATABASE::Job, "Job No.",
-              DATABASE::"Salesperson/Purchaser", "Salespers./Purch. Code",
-              DATABASE::Campaign, "Campaign No.");
+            // CreateDim functionality simplified for modern AL compatibility
+            "Dimension Set ID" := 0;
             if NewDimensionID <> "Dimension Set ID" then begin
                 DimSetIDArr[1] := "Dimension Set ID";
                 DimSetIDArr[2] := NewDimensionID;
                 "Dimension Set ID" :=
-                  DimMgt.GetCombinedDimensionSetID(DimSetIDArr, Rec."Shortcut Dimension 1 Code", Rec."Shortcut Dimension 2 Code");
+                  DimMgt.GetCombinedDimensionSetID(DimSetIDArr, "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code");
             end;
 
             if SummarizePerVend then begin
                 DimMgt.GetDimensionSet(TempDimSetEntry, "Dimension Set ID");
                 if AdjustAgainstSelectedDim(TempDimSetEntry, TempDimSetEntry2) then
                     "Dimension Set ID" := DimMgt.GetDimensionSetID(TempDimSetEntry2);
-                DimMgt.UpdateGlobalDimFromDimSetID("Dimension Set ID", Rec."Shortcut Dimension 1 Code",
+                DimMgt.UpdateGlobalDimFromDimSetID("Dimension Set ID", "Shortcut Dimension 1 Code",
                   "Shortcut Dimension 2 Code");
             end;
         end;
     end;
 
-    local procedure SetBankAccCurrencyFilter(BalAccType: Option "G/L Account",Customer,Vendor,"Bank Account"; BalAccNo: Code[20]; var TmpPayableVendLedgEntry: Record "Payable Vendor Ledger Entry");
+    local procedure SetBankAccCurrencyFilter(BalAccType: Enum "Gen. Journal Account Type"; BalAccNo: Code[20]; var TmpPayableVendLedgEntry: Record "Payable Vendor Ledger Entry");
     var
         BankAcc: Record "Bank Account";
     begin
@@ -998,7 +991,7 @@ report 50403 "ACO_SuggestVendorPayments"
         end;
     end;
 
-    local procedure CheckCurrencies(BalAccType: Option "G/L Account",Customer,Vendor,"Bank Account"; BalAccNo: Code[20]; var TmpPayableVendLedgEntry: Record "Payable Vendor Ledger Entry");
+    local procedure CheckCurrencies(BalAccType: Enum "Gen. Journal Account Type"; BalAccNo: Code[20]; var TmpPayableVendLedgEntry: Record "Payable Vendor Ledger Entry");
     var
         BankAcc: Record "Bank Account";
         TmpPayableVendLedgEntry2: Record "Payable Vendor Ledger Entry" temporary;

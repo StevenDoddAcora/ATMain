@@ -42,12 +42,10 @@ tableextension 50111 "ACO_BankAccount_Ext" extends "Bank Account"
             DataClassification = ToBeClassified;
             TableRelation = "Payment Method";
         }
-        field(50020; ACO_BankPaymentType; Option)
+        field(50020; ACO_BankPaymentType; Enum "Bank Payment Type")
         {
             Caption = 'Bank Payment Type';
             DataClassification = ToBeClassified;
-            OptionMembers = " ","Computer Check","Manual Check","Electronic Payment","Electronic Payment-IAT";
-            OptionCaption = ' ,Computer Check,Manual Check,Electronic Payment,Electronic Payment-IAT';
         }
         //<<2.2.5.2018              
     }

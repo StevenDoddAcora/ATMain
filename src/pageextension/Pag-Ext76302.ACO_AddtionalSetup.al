@@ -223,6 +223,19 @@ pageextension 50302 "ACO_AddtionalSetup" extends ACO_AdditionalSetup
         AdditionalSetup.ACO_CustomerReportCurrency2 := 'USD';
         AdditionalSetup.ACO_CustomerReportCurrency3 := 'EUR';
         AdditionalSetup.ACO_QuantumExportLocation := 'C:\tmp\Avtrade\Export';
+        // AdditionalSetup.ACO_ExposureFileSource := 'C:\navautomation\Import\Exposure';
+        // AdditionalSetup.ACO_ExposureFileProcessed := 'C:\navautomation\Import\Exposure\Archive';
+        // AdditionalSetup.ACO_InvoiceFileSource := 'C:\navautomation\Import\Invoice';
+        // AdditionalSetup.ACO_InvoiceFileProcessed := 'C:\navautomation\Import\Invoice\Archive';
+        // AdditionalSetup.ACO_ImportedInvoicePostedSeriesNo := 'S-INV-LBR';
+        // AdditionalSetup.ACO_CreditFileSource := 'C:\navautomation\Import\Credit';
+        // AdditionalSetup.ACO_CreditFileProcessed := 'C:\navautomation\Import\Credit\Archive';
+        // AdditionalSetup.ACO_ImportedCreditPostedSeriesNo := 'S-CM-LBR';
+        // AdditionalSetup.ACO_ExportCurrency := 'EUR';
+        // AdditionalSetup.ACO_CustomerReportCurrency1 := 'GBP';
+        // AdditionalSetup.ACO_CustomerReportCurrency2 := 'USD';
+        // AdditionalSetup.ACO_CustomerReportCurrency3 := 'EUR';
+        // AdditionalSetup.ACO_QuantumExportLocation := 'C:\navautomation\Export';
         if not AdditionalSetup.Insert() then AdditionalSetup.Modify();
 
 
