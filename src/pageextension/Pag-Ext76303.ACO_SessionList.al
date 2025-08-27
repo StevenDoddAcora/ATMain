@@ -1,3 +1,7 @@
+namespace Acora.AvTrade.MainApp;
+
+using System.Environment;
+
 pageextension 50303 "ACO_SessionList" extends "Concurrent Session List"
 {
     //#region Documentation

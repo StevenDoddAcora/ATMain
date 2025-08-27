@@ -1,3 +1,11 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+using Microsoft.Inventory.Item;
+using Microsoft.Foundation.NoSeries;
+using Microsoft.Finance.Currency;
+
 tableextension 50100 "ACO_AddtionalSetup_Ext" extends ACO_AdditionalSetup //Acora Framework table
 {
     //#region "Documentation"

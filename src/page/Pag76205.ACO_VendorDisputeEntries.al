@@ -1,3 +1,8 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Vendor;
+using System.DateTime;
+
 page 50205 "ACO_VendorDisputeEntries"
 {
     //#region "Documentation"

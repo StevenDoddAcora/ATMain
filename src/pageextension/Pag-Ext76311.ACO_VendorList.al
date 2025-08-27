@@ -1,3 +1,13 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+using Microsoft.Finance.GeneralLedger.Setup;
+using Microsoft.Foundation.Address;
+using System.DateTime;
+
 pageextension 50311 "ACO_VendorList" extends "Vendor List"
 {
     //#region "Documentation"

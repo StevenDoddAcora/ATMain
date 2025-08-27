@@ -2,7 +2,7 @@
   "id": "fd30994e-4be9-4fd7-ad05-2953d66c1a93",
   "name": "AvTrade Core Application",
   "publisher": "Acora Limited",
-  "version": "1.0.0.0",
+  "version": "1.0.0.1",
   "brief": "AvTrade aviation component trading core functionality",
   "description": "Business Central Extension for AvTrade aviation component trading business. Provides core functionality for customer management, extended dimensions, and business processes specific to aviation aftermarket operations.",
   "privacyStatement": "https://www.acora.com/privacy-policy",

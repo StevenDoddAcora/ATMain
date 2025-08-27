@@ -1,3 +1,8 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Sales.Customer;
+using System.DateTime;
+
 table 50104 "ACO_ImportLog"
 {
     //#region "Documentation"

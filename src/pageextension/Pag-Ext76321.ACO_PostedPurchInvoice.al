@@ -1,3 +1,11 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Purchases.Document;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Purchases.History;
+
 pageextension 50321 "ACO_PostedPurchInvoice" extends "Posted Purchase Invoice"
 {
     //#region "Documentation"

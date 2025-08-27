@@ -1,3 +1,10 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Finance.GeneralLedger.Setup;
+using System.Text;
+
 pageextension 50307 "ACO_CashReceiptJournal" extends "Cash Receipt Journal" //Extends page 255 - "Cash Receipt Journal"
 {
 

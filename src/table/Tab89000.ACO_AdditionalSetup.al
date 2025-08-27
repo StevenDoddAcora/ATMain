@@ -1,3 +1,5 @@
+namespace Acora.AvTrade.MainApp;
+
 table 50106 "ACO_AdditionalSetup"
 {
 

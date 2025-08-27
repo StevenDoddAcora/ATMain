@@ -1,3 +1,10 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Document;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+using Microsoft.Purchases.Payables;
+
 tableextension 50116 "ACO_PurchaseHeader" extends "Purchase Header"
 {
     //#region "Documentation"

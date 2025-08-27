@@ -1,3 +1,9 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Purchases.Document;
+
 page 50203 "ACO_JournalDimCombinationList"
 {
 

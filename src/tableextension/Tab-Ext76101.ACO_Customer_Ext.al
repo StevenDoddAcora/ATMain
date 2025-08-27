@@ -1,3 +1,15 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Payables;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+using Microsoft.Sales.Receivables;
+using Microsoft.Finance.Currency;
+using Microsoft.Finance.GeneralLedger.Setup;
+using Microsoft.Foundation.Address;
+using System.DateTime;
+using Microsoft.Inventory.Item;
+
 tableextension 50101 "ACO_Customer_Ext" extends Customer
 {
     //#region "Documentation"

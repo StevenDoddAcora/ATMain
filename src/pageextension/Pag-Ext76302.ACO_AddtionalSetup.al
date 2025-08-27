@@ -1,3 +1,10 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+
 pageextension 50302 "ACO_AddtionalSetup" extends ACO_AdditionalSetup
 {
     //#region Documentation

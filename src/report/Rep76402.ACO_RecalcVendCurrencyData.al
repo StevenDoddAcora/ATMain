@@ -1,3 +1,10 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Currency;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+using System.DateTime;
+
 report 50402 "ACO_RecalcVendCurrencyData"
 {
     //#region "Documentation"

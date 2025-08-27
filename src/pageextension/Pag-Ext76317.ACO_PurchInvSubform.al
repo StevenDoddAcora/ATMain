@@ -1,3 +1,11 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Purchases.Document;
+using Microsoft.Finance.GeneralLedger.Setup;
+using System.Text;
+
 pageextension 50317 "ACO_PurchInvSubform" extends "Purch. Invoice Subform"
 {
     //#region "Documentation"

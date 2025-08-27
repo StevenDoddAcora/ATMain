@@ -1,3 +1,9 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Vendor;
+using Microsoft.Purchases.Payables;
+using Microsoft.Sales.Receivables;
+
 pageextension 50310 "ACO_VendorLedgerEntries" extends "Vendor Ledger Entries" // It extends page 29 - "Vendor Ledger Entries"
 {
 

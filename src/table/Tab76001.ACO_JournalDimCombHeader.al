@@ -1,3 +1,12 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Document;
+using Microsoft.Sales.Customer;
+using Microsoft.Sales.Document;
+using Microsoft.Finance.GeneralLedger.Setup;
+using System.Text;
+using Microsoft.Finance.Dimension;
+
 table 50101 "ACO_JournalDimCombHeader"
 {
 

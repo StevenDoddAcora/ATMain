@@ -1,3 +1,8 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Sales.Document;
+using Microsoft.Sales.History;
+
 tableextension 50108 "ACO_SalesInvLine_Ext" extends "Sales Invoice Line"
 {
     //#region "Documentation"

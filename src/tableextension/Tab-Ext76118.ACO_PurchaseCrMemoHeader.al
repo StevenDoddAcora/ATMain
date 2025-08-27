@@ -1,3 +1,11 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Document;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+using Microsoft.Purchases.Payables;
+using Microsoft.Purchases.History;
+
 tableextension 50118 "ACO_PurchaseCrMemoHeader" extends "Purch. Cr. Memo Hdr."
 {
     //#region "Documentation"
@@ -13,10 +21,11 @@ tableextension 50118 "ACO_PurchaseCrMemoHeader" extends "Purch. Cr. Memo Hdr."
             DataClassification = CustomerContent;
             Description = 'It identifies the Dispute Code related to the Vendor Ledger Entry';
         }
-        field(50020; ACO_DisputeName; text[50]){
+        field(50020; ACO_DisputeName; text[50])
+        {
             Caption = 'Dispute Name';
             FieldClass = FlowField;
-            CalcFormula = Lookup(ACO_DisputeCode.ACO_Description WHERE (ACO_Code=FIELD(ACO_DisputeCode)));
+            CalcFormula = Lookup(ACO_DisputeCode.ACO_Description WHERE(ACO_Code = FIELD(ACO_DisputeCode)));
         }
-    } 
+    }
 }

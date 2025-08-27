@@ -1,3 +1,9 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Bank.BankAccount;
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+
 pageextension 50313 "ACO_BankAccountCard" extends "Bank Account Card"
 {
     //#region "Documentation"

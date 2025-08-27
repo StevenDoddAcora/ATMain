@@ -1,3 +1,7 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Sales.Customer;
+
 table 50100 "ACO_ImportBuffer"
 {
     //#region "Documentation"

@@ -1,3 +1,11 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Purchases.Document;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Purchases.History;
+
 pageextension 50322 "ACO_PostedPurchCrMemo" extends "Posted Purchase Credit Memo"
 {
     //#region "Documentation"

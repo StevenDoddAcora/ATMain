@@ -1,3 +1,7 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Bank.BankAccount;
+
 pageextension 50314 "ACO_BankAccountList" extends "Bank Account List"
 {
     //#region "Documentation"

@@ -1,3 +1,22 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Currency;
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Account;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Finance.GeneralLedger.Ledger;
+using Microsoft.Finance.GeneralLedger.Setup;
+using Microsoft.Foundation.Company;
+using Microsoft.Foundation.Period;
+using Microsoft.Purchases.Document;
+using Microsoft.Purchases.Payables;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+using System.DateTime;
+using System.Environment;
+using System.Reflection;
+using System.Utilities;
+
 report 50401 "ACO_SuggVendPaymentAnalysis"
 {
     //#region "Documentation"

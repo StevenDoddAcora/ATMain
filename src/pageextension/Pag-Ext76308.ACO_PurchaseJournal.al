@@ -1,3 +1,12 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Purchases.Document;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Finance.GeneralLedger.Setup;
+using System.Text;
+
 pageextension 50308 "ACO_PurchaseJournal" extends "Purchase Journal" //Extends page 254 - "Purchase Journal"
 {
 

@@ -1,3 +1,9 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Sales.Customer;
+
 page 50200 "ACO_CustomerEntryStatFactBox"
 {
     //#region Documentation

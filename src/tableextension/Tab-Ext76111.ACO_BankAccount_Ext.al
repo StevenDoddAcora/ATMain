@@ -1,3 +1,8 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Bank.BankAccount;
+using Microsoft.Finance.GeneralLedger.Setup;
+
 tableextension 50111 "ACO_BankAccount_Ext" extends "Bank Account"
 {
     //#region "Documentation"

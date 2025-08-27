@@ -1,3 +1,16 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Bank.BankAccount;
+using Microsoft.Purchases.Document;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+using Microsoft.Sales.Document;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Purchases.Payables;
+using System.DateTime;
+using System.Text;
+using Microsoft.Foundation.NoSeries;
+
 tableextension 50112 "ACO_GenJnlLine_Ext" extends "Gen. Journal Line"
 {
     //#region "Documentation"

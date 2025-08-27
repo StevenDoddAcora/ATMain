@@ -1,3 +1,8 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Bank.BankAccount;
+using Microsoft.Purchases.Vendor;
+
 tableextension 50115 "ACO_VendorBankAccount" extends "Vendor Bank Account"
 {
     //#region "Documentation"

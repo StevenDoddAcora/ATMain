@@ -1,3 +1,8 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Vendor;
+using Microsoft.Purchases.Payables;
+
 pageextension 50316 "ACO_DetVendLedgerEntries" extends "Detailed Vendor Ledg. Entries"
 {
     //#region "Documentation"

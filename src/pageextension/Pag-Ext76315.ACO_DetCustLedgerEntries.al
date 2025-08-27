@@ -1,3 +1,8 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Receivables;
+
 pageextension 50315 "ACO_DetCustLedgerEntries" extends "Detailed Cust. Ledg. Entries"
 {
     //#region "Documentation"

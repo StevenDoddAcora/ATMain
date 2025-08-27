@@ -1,3 +1,28 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Currency;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Finance.GeneralLedger.Setup;
+using Microsoft.Foundation.Address;
+using Microsoft.Foundation.Company;
+using Microsoft.Purchases.Payables;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+using Microsoft.Sales.Receivables;
+using System.DateTime;
+using System.Utilities;
+using Microsoft.Foundation.Comment;
+using Microsoft.Purchases.Comment;
+using Microsoft.Purchases.Document;
+using Microsoft.Purchases.History;
+using Microsoft.Sales.Comment;
+using Microsoft.Sales.FinanceCharge;
+using Microsoft.Sales.History;
+using Microsoft.Sales.Reminder;
+using System.Environment;
+using System.Text;
+using Microsoft.Finance.ReceivablesPayables;
+
 codeunit 50603 "ACO_DisputeManagement"
 {
     //#region "Documentation"

@@ -1,3 +1,8 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Customer;
+
 page 50204 "ACO_DisputeCodes"
 {
 

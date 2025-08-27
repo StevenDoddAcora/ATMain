@@ -1,3 +1,9 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Purchases.Payables;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Sales.Receivables;
+
 tableextension 50113 "ACO_DetCustLedgerEntry" extends "Detailed Cust. Ledg. Entry"
 {
 

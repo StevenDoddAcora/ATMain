@@ -1,3 +1,10 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Sales.Customer;
+using Microsoft.Finance.GeneralLedger.Setup;
+using System.Text;
+using Microsoft.Finance.Dimension;
+
 table 50102 "ACO_JournalDimCombLine"
 
 //#region "Documentation"

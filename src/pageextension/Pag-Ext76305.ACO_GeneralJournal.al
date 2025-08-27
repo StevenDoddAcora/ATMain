@@ -1,3 +1,10 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Finance.GeneralLedger.Setup;
+using System.Text;
+
 pageextension 50305 "ACO_GeneralJournal" extends "General Journal" //Extends page 39 - "General Journal"
 {
 

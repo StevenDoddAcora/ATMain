@@ -1,3 +1,8 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Sales.Customer;
+using System.Text;
+
 table 50103 "ACO_DisputeCode"
 {
     //#region "Documentation"

@@ -1,3 +1,11 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Finance.Dimension;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Purchases.Vendor;
+using Microsoft.Finance.GeneralLedger.Setup;
+using System.Text;
+
 pageextension 50304 "ACO_PaymentJournal" extends "Payment Journal" //Extends page 256 - "Payment Journal"
 {
 

@@ -1,3 +1,7 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Sales.Document;
+
 tableextension 50106 "ACO_SalesLine_Ext" extends "Sales Line"
 {
     //#region "Documentation"

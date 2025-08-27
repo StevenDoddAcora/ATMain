@@ -1,3 +1,8 @@
+namespace Acora.AvTrade.MainApp;
+
+using Microsoft.Sales.Document;
+using Microsoft.Sales.History;
+
 tableextension 50110 "ACO_SalesCMLine_Ext" extends "Sales Cr.Memo Line"
 {
     //#region "Documentation"
